@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victor Martins — Suporte Técnico em formação</title>
+  <title>victor.martins — Suporte Técnico em formação</title>
   <meta name="description"
     content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico N1 / Help Desk. Certificações Google, Cisco e Microsoft. Inglês avançado.">
 
@@ -526,8 +526,13 @@
     }
 
     @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
     }
 
     .cert-description.typing {
@@ -617,12 +622,15 @@
     footer {
       padding: 2rem 0;
       border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       font-family: var(--mono);
       font-size: 0.75rem;
       color: var(--text-muted);
+    }
+
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     /* ============ ANIMATIONS ============ */
@@ -938,6 +946,23 @@
     }
   </style>
 
+  <noscript>
+    <style>
+      .js-enabled .reveal,
+      .js-enabled section,
+      .js-enabled .stack-card,
+      .js-enabled .cert,
+      .js-enabled .project {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    </style>
+    <div style="background: #ffefc1; color: #222; padding: 1.5rem; text-align: center; font-family: sans-serif;">
+      Este site funciona melhor com JavaScript habilitado. Algumas animações e contadores podem não aparecer
+      corretamente.
+    </div>
+  </noscript>
 </head>
 
 <body>
@@ -1210,79 +1235,79 @@
         <span id="cert-count"></span> certificados. A base <em>que importa</em> primeiro.
       </h2>
 
-      <div class="certs-grid">
-
-        <div class="cert" data-cert="technical-support-fundamentals">
-          <div class="cert-issuer">Google</div>
-          <div class="cert-name">Technical Support Fundamentals</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="bits-bytes-networking">
-          <div class="cert-issuer">Google</div>
-          <div class="cert-name">The Bits and Bytes of Computer Networking</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="cybersecurity-intro">
-          <div class="cert-issuer">Cisco</div>
-          <div class="cert-name">Introduction to Cybersecurity</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="azure-ai-900">
-          <div class="cert-issuer">Microsoft</div>
-          <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="office-365">
-          <div class="cert-issuer">Fundação Bradesco</div>
-          <div class="cert-name">Microsoft Office 365</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="hardware-software">
-          <div class="cert-issuer">Fundação Bradesco</div>
-          <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
-          <div class="cert-year">2024</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="lgpd">
-          <div class="cert-issuer">Fundação Bradesco</div>
-          <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="gemini-enterprise">
-          <div class="cert-issuer">Google Cloud</div>
-          <div class="cert-name">Introdução ao Gemini Enterprise</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="hubspot-ai">
-          <div class="cert-issuer">Coursera</div>
-          <div class="cert-name">Marketing Automation with AI and HubSpot</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert" data-cert="coca-cola-coletivo">
-          <div class="cert-issuer">Instituto Coca-Cola Brasil</div>
-          <div class="cert-name">Coletivo Online - Preparação para o Mercado de Trabalho</div>
-          <div class="cert-year">Novembro 2025 (11h)</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
+      <div class="cert" data-cert="technical-support-fundamentals">
+        <div class="cert-issuer">Google</div>
+        <div class="cert-name">Technical Support Fundamentals</div>
+        <div class="cert-year">2024</div>
+        <div class="cert-description cert-loading">Carregando...</div>
       </div>
+
+      <div class="cert" data-cert="bits-bytes-networking">
+        <div class="cert-issuer">Google</div>
+        <div class="cert-name">The Bits and Bytes of Computer Networking</div>
+        <div class="cert-year">2024</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="cybersecurity-intro">
+        <div class="cert-issuer">Cisco</div>
+        <div class="cert-name">Introduction to Cybersecurity</div>
+        <div class="cert-year">2024</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="azure-ai-900">
+        <div class="cert-issuer">Microsoft</div>
+        <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
+        <div class="cert-year">2024</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="office-365">
+        <div class="cert-issuer">Fundação Bradesco</div>
+        <div class="cert-name">Microsoft Office 365</div>
+        <div class="cert-year">2023</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="hardware-software">
+        <div class="cert-issuer">Fundação Bradesco</div>
+        <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
+        <div class="cert-year">2023</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="lgpd">
+        <div class="cert-issuer">Fundação Bradesco</div>
+        <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
+        <div class="cert-year">2023</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="gemini-enterprise">
+        <div class="cert-issuer">Google Cloud</div>
+        <div class="cert-name">Introdução ao Gemini Enterprise</div>
+        <div class="cert-year">2024</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="hubspot-ai">
+        <div class="cert-issuer">Coursera</div>
+        <div class="cert-name">Marketing Automation with AI and HubSpot</div>
+        <div class="cert-year">2024</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+
+      <div class="cert" data-cert="coca-cola-coletivo">
+        <div class="cert-issuer">Instituto Coca-Cola Brasil</div>
+        <div class="cert-name">Coletivo Online - Preparação para o Mercado de Trabalho</div>
+        <div class="cert-year">Novembro 2023 (11h)</div>
+        <div class="cert-description cert-loading">Carregando...</div>
+      </div>
+      <div class="cert-description cert-loading">Carregando...</div>
+    </div>
+
+    </div>
 
     </div>
   </section>
@@ -1329,7 +1354,7 @@
   </section>
 
   <footer>
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="container footer-flex">
       <span>© 2026 Victor Martins</span>
       <span>Construído em HTML &amp; CSS · Hospedado no GitHub Pages</span>
     </div>
@@ -1429,20 +1454,20 @@
     window.addEventListener('scroll', onScrollHandler, { passive: true });
     window.addEventListener('load', () => {
       reveal();
-    });
-
-    const certSummaries = {
-      'technical-support-fundamentals': 'Fundamentos de suporte técnico: diagnóstico, comunicação, chamados e help desk.',
-      'bits-bytes-networking': 'Redes básicas: OSI, TCP/IP, DNS, DHCP, roteamento e troubleshooting.',
-      'cybersecurity-intro': 'Cibersegurança: ameaças, senhas, phishing, criptografia e políticas.',
-      'azure-ai-900': 'IA Azure: ML, visão computacional, NLP e ética em IA.',
-      'office-365': 'Microsoft 365: Word, Excel, Teams, OneDrive e Copilot.',
-      'hardware-software': 'Hardware: CPU, RAM, HD, montagem PCs e SO.',
-      'lgpd': 'LGPD: direitos, obrigações, penalidades e privacidade.',
-      'gemini-enterprise': 'Gemini Enterprise: IA corporativa e Google Workspace.',
-      'hubspot-ai': 'Marketing IA: HubSpot CRM, workflows e análise preditiva.',
-      'coca-cola-coletivo': 'Soft skills: comunicação, equipe, problemas e networking.'
-    };
+      document.querySelectorAll('.cert').forEach((cert, index) => {
+        const key = cert.dataset.cert;
+        const desc = cert.querySelector('.cert-description');
+        setTimeout(() => {
+          if (certSummaries[key] && desc) {
+            desc.textContent = certSummaries[key];
+            desc.classList.add('typing');
+            desc.classList.remove('cert-loading');
+          }
+        }, 500 + (index * 150));
+      });
+      'hubspot-ai'; 'Marketing IA: HubSpot CRM, workflows e análise preditiva.',
+        'coca-cola-coletivo'; 'Soft skills: comunicação, equipe, problemas e networking.'
+    })
 
     const loadCertDescriptions = () => {
       document.querySelectorAll('.cert').forEach((cert, index) => {
@@ -1467,7 +1492,10 @@
         }
       });
     });
-    observer.observe(document.getElementById('certificacoes'));
+    const certSection = document.getElementById('certificacoes');
+    if (certSection) {
+      observer.observe(certSection);
+    }
   </script>
 
 </body>
