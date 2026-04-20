@@ -779,6 +779,117 @@
         gap: 1rem;
       }
     }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Page transitions entre seções */
+    section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Animações staggered para cards */
+    .stack-card,
+    .cert,
+    .project {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .stack-card.animate,
+    .cert.animate,
+    .project.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hover animations mais ricas */
+    .cert:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(159, 255, 177, 0.15);
+    }
+
+    .stack-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(159, 255, 177, 0.1);
+    }
+
+    .project:hover {
+      transform: translateX(8px);
+    }
+
+    /* Nav links com glow */
+    nav a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+    }
+
+    /* Pulse suave nos stats */
+    .stat-number {
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover .stat-number {
+      transform: scale(1.05);
+    }
+
+    /* Lines que aparecem gradualmente */
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transition: transform 0.8s ease-out;
+    }
+
+    section.visible::before {
+      transform: scaleX(1);
+    }
   </style>
 
 </head>
@@ -1168,87 +1279,102 @@
     </div>
   </footer>
 
-<script>
-// Script com trigger VISUAL - animação APENAS quando elemento está visível
+  <script>
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
 
-const easeOut = t => 1 - Math.pow(1 - t, 3);
+    document.documentElement.classList.add('js-enabled');
 
-document.documentElement.classList.add('js-enabled');
+    let counterAnimated = false;
+    let ticking = false;
 
-let counterAnimated = false;
+    const animateCounter = (el, target, duration = 1200) => {
+      let startTime = null;
 
-const animateCounter = (el, target, duration = 1200) => {
-  let startTime = null;
-  
-  const update = (timestamp) => {
-    if (!startTime) startTime = timestamp;
-    
-    const progress = Math.min((timestamp - startTime) / duration, 1);
-    const eased = easeOut(progress);
-    
-    const value = Math.floor(eased * target);
-    el.textContent = value;
-    
-    if (progress < 1) {
+      const update = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = easeOut(progress);
+
+        const value = Math.floor(eased * target);
+        el.textContent = value;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target;
+        }
+      };
+
       requestAnimationFrame(update);
-    } else {
-      el.textContent = target;
-    }
-  };
-  
-  requestAnimationFrame(update);
-};
+    };
 
-const runCounter = () => {
-  if (counterAnimated) return;
-  
-  const section = document.getElementById('certificacoes');
-  if (!section) return;
-  
-  // ✅ VERIFICA SE ESTÁ VISÍVEL (centro da tela)
-  const rect = section.getBoundingClientRect();
-  const isVisible = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
-  
-  if (isVisible) {
-    const certCount = document.querySelectorAll('.cert').length;
-    const el1 = document.getElementById('cert-count');
-    const el2 = document.getElementById('cert-count-num');
-    
-    if (el1) animateCounter(el1, certCount);
-    if (el2) animateCounter(el2, certCount);
-    
-    counterAnimated = true;
-    console.log('✅ Animação de contadores ativada!');
-  }
-};
+    const animateChildren = (parent) => {
+      const children = parent.querySelectorAll('.stack-card, .cert, .project');
+      children.forEach((child, index) => {
+        setTimeout(() => {
+          child.classList.add('animate');
+        }, index * 100);
+      });
+    };
 
-const reveal = () => {
-  document.querySelectorAll('.reveal').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.85) {
-      el.classList.add('visible');
-    }
-  });
-};
+    const runCounter = () => {
+      if (counterAnimated) return;
 
-let ticking = false;
-const onScrollHandler = () => {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      reveal();
+      const section = document.getElementById('certificacoes');
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+
+      if (isVisible) {
+        const certCount = document.querySelectorAll('.cert').length;
+        const el1 = document.getElementById('cert-count');
+        const el2 = document.getElementById('cert-count-num');
+
+        if (el1) animateCounter(el1, certCount);
+        if (el2) animateCounter(el2, certCount);
+
+        counterAnimated = true;
+      }
+    };
+
+    const reveal = () => {
+      document.querySelectorAll('section').forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          section.classList.add('visible');
+
+          // Animação staggered dos filhos
+          if (section.querySelector('.stack-grid, .certs-grid, .projects-list')) {
+            setTimeout(() => animateChildren(section), 200);
+          }
+
+          // Reveal original para .reveal
+          if (section.classList.contains('reveal')) {
+            section.classList.add('visible');
+          }
+        }
+      });
+
       runCounter();
-      ticking = false;
-    });
-    ticking = true;
-  }
-};
+    };
 
-window.addEventListener('scroll', onScrollHandler, { passive: true });
-window.addEventListener('load', () => {
-  reveal();
-  runCounter();
-});
-</script>
+    const onScrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          reveal();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScrollHandler, { passive: true });
+    window.addEventListener('load', () => {
+      reveal();
+    });
+  </script>
 
 </body>
 
