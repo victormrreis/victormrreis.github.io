@@ -766,7 +766,7 @@
 
   <aside class="about-stats">
     <div class="stat">
-      <span class="stat-number">13</span>
+      <span class="stat-number" id="cert-count-num">13</span>
       <span class="stat-label">certificações em TI, IA, redes e cibersegurança</span>
     </div>
     <div class="stat">
@@ -947,7 +947,7 @@
   <div class="container">
     <div class="section-label">04 / Certificações</div>
     <h2 class="section-title">
-      Treze certificados. A base <em>que importa</em> primeiro.
+      <span id="cert-count">Treze</span> certificados. A base <em>que importa</em> primeiro.
     </h2>
 
 <div class="certs-grid">
@@ -1068,6 +1068,42 @@
   // Progressive enhancement — apply scroll-reveal only if JS loads
   document.documentElement.classList.add('js-enabled');
 
+  // Conta certificados e atualiza dinamicamente
+  const updateCertCount = () => {
+    const certCount = document.querySelectorAll('.cert').length;
+    const certCountWordEl = document.getElementById('cert-count');
+    const certCountNumEl = document.getElementById('cert-count-num');
+    const numberWords = {
+      1: 'Um',
+      2: 'Dois',
+      3: 'Três',
+      4: 'Quatro',
+      5: 'Cinco',
+      6: 'Seis',
+      7: 'Sete',
+      8: 'Oito',
+      9: 'Nove',
+      10: 'Dez',
+      11: 'Onze',
+      12: 'Doze',
+      13: 'Treze',
+      14: 'Quatorze',
+      15: 'Quinze',
+      16: 'Dezesseis',
+      17: 'Dezessete',
+      18: 'Dezoito',
+      19: 'Dezenove',
+      20: 'Vinte',
+      30: 'Trinta'
+    };
+    if (certCountWordEl) {
+      certCountWordEl.textContent = numberWords[certCount] || certCount.toString();
+    }
+    if (certCountNumEl) {
+      certCountNumEl.textContent = certCount.toString();
+    }
+  };
+
   const reveal = () => {
     document.querySelectorAll('.reveal').forEach(el => {
       const rect = el.getBoundingClientRect();
@@ -1079,6 +1115,7 @@
 
   window.addEventListener('scroll', reveal);
   window.addEventListener('load', reveal);
+  window.addEventListener('load', updateCertCount);
 </script>
 
 </body>
