@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Martins — Suporte Técnico em formação</title>
+<meta name="description" content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico N1 / Help Desk. Certificações Google, Cisco e Microsoft. Inglês avançado.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0e0e10;
+    --bg-alt: #17171a;
+    --line: #27272c;
+    --text: #e8e8ea;
+    --text-dim: #8a8a93;
+    --text-muted: #5a5a62;
+    --accent: #9fffb1;       /* verde-terminal */
+    --accent-dim: #5fc774;
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "IBM Plex Sans", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", "Courier New", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 0;
+    background: rgba(14, 14, 16, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .logo::before {
+    content: "›_";
+    color: var(--accent);
+    margin-right: 0.4rem;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+    text-transform: lowercase;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    position: relative;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s 0.1s both;
+  }
+
+  .hero-tag::before {
+    content: "//";
+    margin-right: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+    color: var(--text);
+    animation: fadeUp 0.8s 0.2s both;
+  }
+
+  h1 .italic {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  .hero-sub {
+    font-size: 1.25rem;
+    color: var(--text-dim);
+    max-width: 640px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s 0.3s both;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    animation: fadeUp 0.8s 0.4s both;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .meta-value {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .meta-value .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  /* ============ SECTIONS ============ */
+  section {
+    padding: 8rem 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .section-label::before {
+    content: "/ ";
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 4rem;
+    max-width: 900px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ============ ABOUT ============ */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-text strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* ============ STACK ============ */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .stack-card {
+    background: var(--bg);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s ease;
+  }
+
+  .stack-card:hover {
+    background: var(--bg-alt);
+  }
+
+  .stack-card-title {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .stack-card ul {
+    list-style: none;
+  }
+
+  .stack-card li {
+    font-size: 0.95rem;
+    color: var(--text);
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    align-items: center;
+  }
+
+  .stack-card li:last-child { border-bottom: none; }
+
+  .stack-card li::before {
+    content: "—";
+    color: var(--text-muted);
+    margin-right: 0.75rem;
+    font-family: var(--mono);
+  }
+
+  /* ============ PROJECTS ============ */
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: 100px 1fr 2fr auto;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+    transition: padding-left 0.3s ease;
+    cursor: default;
+  }
+
+  .project:last-child { border-bottom: 1px solid var(--line); }
+
+  .project:hover {
+    padding-left: 1rem;
+  }
+
+  .project:hover .project-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .project-num {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .project-name em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+
+  .project-arrow {
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  /* ============ CERTS ============ */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .cert {
+    padding: 1.5rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--accent-dim);
+    transition: border-left-color 0.2s, transform 0.2s;
+  }
+
+  .cert:hover {
+    border-left-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .cert-issuer {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-name {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .cert-year {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* ============ CONTACT ============ */
+  .contact {
+    padding: 8rem 0 6rem;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    max-width: 800px;
+  }
+
+  .contact-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 2rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--line);
+    align-items: center;
+    text-decoration: none;
+    color: var(--text);
+    transition: padding-left 0.25s, color 0.25s;
+  }
+
+  .contact-item:last-child { border-bottom: 1px solid var(--line); }
+
+  .contact-item:hover {
+    padding-left: 1rem;
+    color: var(--accent);
+  }
+
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .contact-value {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .contact-arrow {
+    font-family: var(--mono);
+    transition: transform 0.25s;
+  }
+
+  .contact-item:hover .contact-arrow {
+    transform: translateX(6px);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+  }
+
+  /* Reveal on scroll (progressive enhancement — content is visible by default) */
+  .js-enabled .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .js-enabled .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .container { padding: 0 1.5rem; }
+
+    nav ul { gap: 1rem; }
+    nav a { font-size: 0.7rem; }
+
+    section { padding: 5rem 0; }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .project {
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1rem;
+    }
+
+    .project-num { grid-row: 1; grid-column: 1; }
+    .project-name { grid-row: 1; grid-column: 2; font-size: 1.25rem; }
+    .project-desc { grid-row: 2; grid-column: 1 / -1; }
+    .project-arrow { display: none; }
+
+    .contact-item {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+      padding: 1.25rem 0;
+    }
+
+    .contact-value { font-size: 1.1rem; }
+    .contact-arrow { display: none; }
+
+    footer { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">victor.martins</div>
+    <ul>
+      <li><a href="#sobre">sobre</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#projetos">projetos</a></li>
+      <li><a href="#contato">contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-tag">disponível para vagas · nova iguaçu / rj</div>
+
+      <h1>
+        Victor<br>
+        <span class="italic">Martins</span>
+      </h1>
+
+      <p class="hero-sub">
+        Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk.
+        Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.
+      </p>
+
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Status</span>
+          <span class="meta-value"><span class="dot"></span>Open to work</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Cargo-alvo</span>
+          <span class="meta-value">Suporte TI · Help Desk N1</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Localização</span>
+          <span class="meta-value">Rio de Janeiro · BR</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Idiomas</span>
+          <span class="meta-value">PT-BR · EN (C1)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SOBRE ============ -->
+<section id="sobre" class="reveal">
+  <div class="container">
+    <div class="section-label">01 / Sobre</div>
+    <h2 class="section-title">
+      19 anos, três anos de técnica acumulados e <em>uma direção clara</em>.
+    </h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Comecei cedo — aos 16 já estava terminando a formação completa de inglês na Wizard,
+          e aos 19 já entrego rotina administrativa em <strong>contrato Petrobras</strong>, em ambiente industrial
+          de alta criticidade na Usina Termelétrica de Seropédica.
+        </p>
+        <p>
+          Paralelamente, ataco a base técnica que falta: <strong>certificações Google em Technical Support
+          e Networking</strong>, Cisco em Cybersecurity, Microsoft em Office 365 e Azure AI Fundamentals.
+          Documento cada passo publicamente no LinkedIn, com <strong>estudos e projetos em Python</strong>
+          postados semanalmente.
+        </p>
+        <p>
+          Direciono a carreira para Suporte Técnico N1 / Help Desk como primeiro passo formal em TI.
+          Perfil orientado a <strong>registro de chamados, troubleshooting, atendimento ao usuário
+          e escalonamento estruturado</strong>. Com raiz em rotinas de documentação técnica que já
+          pratico no dia a dia.
+        </p>
+      </div>
+
+      <aside class="about-stats">
+        <div class="stat">
+          <span class="stat-number">13</span>
+          <span class="stat-label">certificações em TI, IA, redes e cibersegurança</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">8</span>
+          <span class="stat-label">meses em contrato prestado à Petrobras</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">8</span>
+          <span class="stat-label">anos de formação contínua em inglês (Wizard, W12)</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section id="stack" class="reveal">
+  <div class="container">
+    <div class="section-label">02 / Stack técnica</div>
+    <h2 class="section-title">
+      Ferramentas, sistemas e <em>conceitos</em> que domino ou tenho base sólida.
+    </h2>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-title">Suporte &amp; Sistemas</div>
+        <ul>
+          <li>Troubleshooting de hardware e software</li>
+          <li>Registro e acompanhamento de chamados</li>
+          <li>Atendimento ao usuário</li>
+          <li>Windows 10 / 11</li>
+          <li>Fundamentos de Hardware</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-card-title">Redes &amp; Segurança</div>
+        <ul>
+          <li>TCP/IP, DNS, DHCP</li>
+          <li>Modelo OSI</li>
+          <li>Fundamentos de Cibersegurança</li>
+          <li>LGPD</li>
+          <li>Boas práticas de senhas e phishing</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-card-title">Microsoft 365</div>
+        <ul>
+          <li>Word, Excel, PowerPoint</li>
+          <li>Outlook, OneDrive, Teams</li>
+          <li>Azure AI-900 Fundamentals</li>
+          <li>Copilot &amp; automação básica</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-card-title">Programação</div>
+        <ul>
+          <li>Python — controle de fluxo, POO</li>
+          <li>Manipulação de arquivos, try/except</li>
+          <li>Lógica de programação (Portugol)</li>
+          <li>Git / GitHub (em adoção)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJETOS ============ -->
+<section id="projetos" class="reveal">
+  <div class="container">
+    <div class="section-label">03 / Projetos</div>
+    <h2 class="section-title">
+      Construído para <em>aprender</em>, publicado para <em>provar</em>.
+    </h2>
+
+    <div class="projects-list">
+
+      <div class="project">
+        <span class="project-num">01</span>
+        <div>
+          <div class="project-name">Polimorfismo em <em>Python</em></div>
+          <div class="project-tags">
+            <span class="project-tag">python</span>
+            <span class="project-tag">POO</span>
+            <span class="project-tag">design</span>
+          </div>
+        </div>
+        <div class="project-desc">
+          Dois projetos aplicando polimorfismo: calculadora de áreas geométricas
+          (quadrado, retângulo, círculo) e sistema de pagamentos (Pix, Cartão, Boleto)
+          — mesmo método, comportamentos distintos, zero checagem de tipo.
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project">
+        <span class="project-num">02</span>
+        <div>
+          <div class="project-name">Sistema de <em>Cachorros &amp; Dono</em></div>
+          <div class="project-tags">
+            <span class="project-tag">python</span>
+            <span class="project-tag">POO</span>
+            <span class="project-tag">classes</span>
+          </div>
+        </div>
+        <div class="project-desc">
+          Primeira imersão em classes com <code>__init__</code>, self e composição entre objetos.
+          Classe Dono gerencia lista de Cachorros — adotar, alimentar, brincar, ver status.
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project">
+        <span class="project-num">03</span>
+        <div>
+          <div class="project-name">Diário com <em>persistência</em></div>
+          <div class="project-tags">
+            <span class="project-tag">python</span>
+            <span class="project-tag">file i/o</span>
+            <span class="project-tag">cli</span>
+          </div>
+        </div>
+        <div class="project-desc">
+          Aplicação de terminal com leitura e escrita em arquivo, tratamento de exceções
+          e interface limpa. Primeiro projeto em que os dados sobrevivem ao fechamento do programa.
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project">
+        <span class="project-num">04</span>
+        <div>
+          <div class="project-name">Calculadora <em>robusta</em></div>
+          <div class="project-tags">
+            <span class="project-tag">python</span>
+            <span class="project-tag">try/except</span>
+            <span class="project-tag">loops</span>
+          </div>
+        </div>
+        <div class="project-desc">
+          Calculadora no terminal com cinco operações, validação de entrada, loops de repetição
+          e tratamento de exceções — feita para resistir a todo tipo de input inválido.
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project">
+        <span class="project-num">05</span>
+        <div>
+          <div class="project-name">Monitoramento de <em>sensor industrial</em></div>
+          <div class="project-tags">
+            <span class="project-tag">portugol</span>
+            <span class="project-tag">algoritmos</span>
+            <span class="project-tag">acadêmico</span>
+          </div>
+        </div>
+        <div class="project-desc">
+          Projeto acadêmico (UVA) que simula a leitura de 150 valores de sensor em esteira
+          industrial, com modularização por funções, uso de vetores e estruturas condicionais.
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICAÇÕES ============ -->
+<section id="certificacoes" class="reveal">
+  <div class="container">
+    <div class="section-label">04 / Certificações</div>
+    <h2 class="section-title">
+      Treze certificados. A base <em>que importa</em> primeiro.
+    </h2>
+
+    <div class="certs-grid">
+
+      <div class="cert">
+        <div class="cert-issuer">Google</div>
+        <div class="cert-name">Technical Support Fundamentals</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Google</div>
+        <div class="cert-name">The Bits and Bytes of Computer Networking</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Cisco</div>
+        <div class="cert-name">Introduction to Cybersecurity</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Microsoft</div>
+        <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Fundação Bradesco</div>
+        <div class="cert-name">Microsoft Office 365</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Fundação Bradesco</div>
+        <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
+        <div class="cert-year">2024</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Fundação Bradesco</div>
+        <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Google Cloud</div>
+        <div class="cert-name">Introdução ao Gemini Enterprise</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-issuer">Coursera</div>
+        <div class="cert-name">Marketing Automation with AI and HubSpot</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATO ============ -->
+<section id="contato" class="contact reveal">
+  <div class="container">
+    <div class="section-label">05 / Contato</div>
+    <h2 class="contact-title">
+      Procurando alguém <em>pronto para começar?</em>
+    </h2>
+
+    <div class="contact-list">
+
+      <a href="mailto:SEU-EMAIL@AQUI.COM" class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">[byvictormartinsreis@gmail.com]</span>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/victor-martins-2176b4360" target="_blank" rel="noopener" class="contact-item">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">/in/victor-martins-2176b4360</span>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="https://github.com/SEU-USUARIO-AQUI" target="_blank" rel="noopener" class="contact-item">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">/victormrreis</span>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener" class="contact-item">
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+55 (21) 97358-1707</span>
+        <span class="contact-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+    <span>© 2026 Victor Martins</span>
+    <span>Construído em HTML &amp; CSS · Hospedado no GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement — apply scroll-reveal only if JS loads
+  document.documentElement.classList.add('js-enabled');
+
+  const reveal = () => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', reveal);
+  window.addEventListener('load', reveal);
+</script>
+
+</body>
+</html>
