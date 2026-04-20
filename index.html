@@ -1167,9 +1167,9 @@
       <span>Construído em HTML &amp; CSS · Hospedado no GitHub Pages</span>
     </div>
   </footer>
-  
+
 <script>
-// Substitua TODO o conteúdo do <script> atual por este código limpo:
+// Script com trigger VISUAL - animação APENAS quando elemento está visível
 
 const easeOut = t => 1 - Math.pow(1 - t, 3);
 
@@ -1205,9 +1205,11 @@ const runCounter = () => {
   const section = document.getElementById('certificacoes');
   if (!section) return;
   
+  // ✅ VERIFICA SE ESTÁ VISÍVEL (centro da tela)
   const rect = section.getBoundingClientRect();
+  const isVisible = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
   
-  if (rect.top < window.innerHeight * 0.85) {
+  if (isVisible) {
     const certCount = document.querySelectorAll('.cert').length;
     const el1 = document.getElementById('cert-count');
     const el2 = document.getElementById('cert-count-num');
@@ -1216,6 +1218,7 @@ const runCounter = () => {
     if (el2) animateCounter(el2, certCount);
     
     counterAnimated = true;
+    console.log('✅ Animação de contadores ativada!');
   }
 };
 
@@ -1228,12 +1231,19 @@ const reveal = () => {
   });
 };
 
+let ticking = false;
 const onScrollHandler = () => {
-  reveal();
-  runCounter();
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      reveal();
+      runCounter();
+      ticking = false;
+    });
+    ticking = true;
+  }
 };
 
-window.addEventListener('scroll', onScrollHandler);
+window.addEventListener('scroll', onScrollHandler, { passive: true });
 window.addEventListener('load', () => {
   reveal();
   runCounter();
