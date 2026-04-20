@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victor Martins — Suporte Técnico em formação</title>
+  <title>Victor Martins — IT Support & Help Desk</title>
   <meta name="description"
-    content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico N1 / Help Desk. Certificações Google, Cisco e Microsoft. Inglês avançado.">
+    content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico. Certificações Google, Cisco e Microsoft.">
 
+  <!-- Pré-conexões para performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -15,21 +16,46 @@
     rel="stylesheet">
 
   <style>
+    /* ============ DESIGN TOKENS & THEMING ============ */
     :root {
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "IBM Plex Sans", -apple-system, sans-serif;
+      --mono: "JetBrains Mono", "Courier New", monospace;
+      --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --nav-height: 70px;
+    }
+
+    [data-theme="dark"] {
       --bg: #0e0e10;
       --bg-alt: #17171a;
       --line: #27272c;
       --text: #e8e8ea;
       --text-dim: #8a8a93;
       --text-muted: #5a5a62;
-      --accent: #9fffb1;
-      /* verde-terminal */
+      --accent: #9fffb1; 
       --accent-dim: #5fc774;
-      --serif: "Fraunces", Georgia, serif;
-      --sans: "IBM Plex Sans", -apple-system, sans-serif;
-      --mono: "JetBrains Mono", "Courier New", monospace;
+      --nav-bg: rgba(14, 14, 16, 0.65);
+      --glow-color: rgba(159, 255, 177, 0.06);
+      --grain-opacity: 0.5;
+      --selection-bg: rgba(159, 255, 177, 0.2);
     }
 
+    [data-theme="light"] {
+      --bg: #f7f5f0; 
+      --bg-alt: #eeeae1;
+      --line: #d8d3c7;
+      --text: #2c2c2e;
+      --text-dim: #5a5a62;
+      --text-muted: #8a8a93;
+      --accent: #0d6e38; 
+      --accent-dim: #1a8f4c;
+      --nav-bg: rgba(247, 245, 240, 0.75);
+      --glow-color: rgba(13, 110, 56, 0.04);
+      --grain-opacity: 0.3;
+      --selection-bg: rgba(13, 110, 56, 0.15);
+    }
+
+    /* ============ RESET & BASE ============ */
     * {
       margin: 0;
       padding: 0;
@@ -38,6 +64,8 @@
 
     html {
       scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-dim) var(--bg-alt);
     }
 
     body {
@@ -48,34 +76,52 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      position: relative;
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-    /* Grain texture overlay */
+    ::selection {
+      background: var(--selection-bg);
+      color: var(--text);
+    }
+
+    *:focus-visible {
+      outline: 2px dashed var(--accent);
+      outline-offset: 4px;
+      transition: outline-offset 0.2s ease;
+    }
+
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.5;
+      z-index: 1000;
+      opacity: var(--grain-opacity);
+      transition: opacity 0.5s ease;
     }
 
-    /* Ambient cursor glow */
-    .cursor-glow {
+    #scroll-progress {
       position: fixed;
       top: 0;
       left: 0;
-      width: 600px;
-      height: 600px;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 9999;
+      will-change: width;
+    }
+
+    .cursor-glow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(159, 255, 177, 0.04) 0%, rgba(14, 14, 16, 0) 70%);
+      background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
       transform: translate(-50%, -50%);
-      transition: top 0.1s ease-out, left 0.1s ease-out;
-      mix-blend-mode: screen;
+      will-change: transform;
     }
 
     .container {
@@ -86,24 +132,22 @@
       z-index: 2;
     }
 
-    /* ============ NAV ============ */
+    /* ============ NAVIGATION ============ */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 1.25rem 0;
-      background: rgba(14, 14, 16, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(39, 39, 44, 0.5);
-      transition: all 0.3s ease;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(138, 138, 147, 0.1);
+      transition: padding 0.3s ease, background 0.5s ease;
     }
 
     nav.scrolled {
       padding: 0.8rem 0;
-      background: rgba(14, 14, 16, 0.95);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
     nav .container {
@@ -117,37 +161,32 @@
       font-size: 0.85rem;
       color: var(--text);
       letter-spacing: 0.02em;
+      text-decoration: none;
       display: flex;
       align-items: center;
     }
 
     .logo::before {
-      content: "›";
-      color: var(--accent);
-      margin-right: 0.4rem;
-      font-size: 1.2rem;
+      content: "›"; color: var(--accent); margin-right: 0.4rem; font-size: 1.2rem;
     }
-
-    /* Terminal blink effect */
     .logo::after {
-      content: "_";
-      color: var(--accent);
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
+      content: "_"; color: var(--accent); margin-left: 2px; animation: blink 1s step-end infinite;
     }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    nav ul {
+    .nav-actions {
       display: flex;
+      align-items: center;
       gap: 2.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
       list-style: none;
     }
 
-    nav a {
+    .nav-links a {
       font-family: var(--mono);
       font-size: 0.78rem;
       color: var(--text-dim);
@@ -158,1254 +197,850 @@
       padding-bottom: 4px;
     }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: 0;
-      left: 0;
+    .nav-links a::after {
+      content: ''; position: absolute;
+      width: 0; height: 1px; bottom: 0; left: 0;
       background-color: var(--accent);
-      transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: width 0.3s var(--transition-smooth);
     }
 
-    nav a:hover {
-      color: var(--text);
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-left: 1px solid var(--line);
+      padding-left: 1.5rem;
     }
 
-    nav a:hover::after {
-      width: 100%;
+    .icon-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
     }
+
+    .icon-btn:hover {
+      background: var(--bg-alt);
+      color: var(--accent);
+      border-color: var(--line);
+    }
+
+    .icon-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    [data-theme="dark"] .icon-moon { display: none; }[data-theme="light"] .icon-sun { display: none; }
 
     /* ============ HERO ============ */
     .hero {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 6rem;
-      padding-bottom: 4rem;
-      position: relative;
-      overflow: hidden;
+      display: flex; align-items: center;
+      padding-top: 6rem; padding-bottom: 4rem;
+      position: relative; overflow: hidden;
     }
 
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      width: 100%;
-      transition: transform 0.1s ease-out; /* For Parallax */
+      display: flex; flex-direction: column; gap: 1.5rem;
+      width: 100%; max-width: 900px;
+      will-change: transform;
     }
 
     .hero-tag {
       font-family: var(--mono);
       font-size: 0.8rem;
       color: var(--accent);
-      margin-bottom: 2rem;
       animation: fadeUp 0.8s 0.1s both;
-      display: inline-flex;
-      align-items: center;
+      display: inline-flex; align-items: center;
       padding: 6px 12px;
-      background: rgba(159, 255, 177, 0.05);
+      background: var(--glow-color);
       border: 1px solid rgba(159, 255, 177, 0.1);
       border-radius: 4px;
       width: fit-content;
     }
-
-    .hero-tag::before {
-      content: "//";
-      margin-right: 0.6rem;
-      color: var(--text-muted);
-    }
+    .hero-tag::before { content: "//"; margin-right: 0.6rem; color: var(--accent-dim); opacity: 0.5; }
 
     h1 {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-variation-settings: "opsz" 144, "SOFT" 50;
-      font-size: clamp(3rem, 10vw, 8rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 2rem;
-      color: var(--text);
-      animation: fadeUp 0.8s 0.2s both;
+      font-family: var(--serif); font-weight: 400; font-variation-settings: "opsz" 144, "SOFT" 50;
+      font-size: clamp(3.5rem, 10vw, 8.5rem); line-height: 0.95; letter-spacing: -0.03em;
+      color: var(--text); animation: fadeUp 0.8s 0.2s both;
     }
-
-    h1 .italic {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 300;
-    }
+    h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
 
     .hero-sub {
-      font-size: 1.25rem;
-      color: var(--text-dim);
-      max-width: 640px;
-      line-height: 1.6;
-      margin-bottom: 3rem;
+      font-size: 1.25rem; color: var(--text-dim); max-width: 700px; line-height: 1.6;
       animation: fadeUp 0.8s 0.3s both;
     }
 
     .hero-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
-      max-width: 900px;
-      padding-top: 2rem;
-      border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem;
+      padding-top: 3rem; margin-top: 1.5rem; border-top: 1px solid var(--line);
       animation: fadeUp 0.8s 0.4s both;
     }
 
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      transition: transform 0.3s ease;
-    }
-
-    .meta-item:hover {
-      transform: translateY(-2px);
-    }
-
-    .meta-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .meta-value {
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 500;
-    }
-
+    .meta-item { display: flex; flex-direction: column; gap: 0.4rem; }
+    .meta-label { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .meta-value { font-family: var(--sans); font-size: 0.95rem; color: var(--text); font-weight: 500; display: flex; align-items: center; }
     .meta-value .dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      margin-right: 0.5rem;
-      animation: pulse 2s infinite;
-      box-shadow: 0 0 8px rgba(159, 255, 177, 0.4);
+      display: inline-block; width: 8px; height: 8px;
+      background: var(--accent); border-radius: 50%; margin-right: 0.5rem;
+      animation: pulse 2s infinite; box-shadow: 0 0 8px var(--glow-color);
     }
 
-    /* ============ SECTIONS ============ */
-    section {
-      padding: 8rem 0;
-      border-top: 1px solid var(--line);
-      position: relative;
-    }
-
+    /* ============ SECTIONS (GLOBAL) ============ */
+    section { padding: 8rem 0; border-top: 1px solid var(--line); position: relative; }
+    
     .section-label {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
+      font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted);
+      margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.15em;
     }
-
-    .section-label::before {
-      content: "/ ";
-      color: var(--accent);
-    }
-
+    .section-label::before { content: "/ "; color: var(--accent); }
+    
     .section-title {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-variation-settings: "opsz" 144, "SOFT" 30;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 4rem;
-      max-width: 900px;
+      font-family: var(--serif); font-weight: 300; font-variation-settings: "opsz" 144, "SOFT" 30;
+      font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 4rem; max-width: 900px; color: var(--text);
     }
-
-    .section-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .section-title em { font-style: italic; color: var(--accent); }
 
     /* ============ ABOUT ============ */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    .about-text strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
+    .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 1.1rem; line-height: 1.75; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .about-text strong { color: var(--text); font-weight: 500; }
+    
     .about-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding: 2.5rem;
-      background: var(--bg-alt);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      position: relative;
-      overflow: hidden;
+      display: flex; flex-direction: column; gap: 2rem; padding: 2.5rem;
+      background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px;
+      position: relative; overflow: hidden;
     }
-
     .about-stats::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
+      content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
       background: linear-gradient(to bottom, var(--accent), transparent);
     }
-
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px dashed var(--line);
-      transition: transform 0.3s ease;
-    }
-
-    .stat:hover {
-      transform: translateX(8px);
-    }
-
-    .stat:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .stat-number {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-variation-settings: "opsz" 144;
-      font-size: 3.5rem;
-      line-height: 1;
-      color: var(--accent);
-      letter-spacing: -0.02em;
-    }
-
-    .stat-label {
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
+    .stat { display: flex; flex-direction: column; gap: 0.5rem; padding-bottom: 2rem; border-bottom: 1px dashed var(--line); }
+    .stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-number { font-family: var(--serif); font-weight: 300; font-size: 3.5rem; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+    .stat-label { font-family: var(--sans); font-size: 0.95rem; color: var(--text-dim); line-height: 1.4; }
 
     /* ============ STACK ============ */
     .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px;
+      background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
     }
-
     .stack-card {
-      background: var(--bg);
-      padding: 2.5rem 2rem;
-      transition: background 0.4s ease, transform 0.4s ease;
-      cursor: crosshair;
+      background: var(--bg); padding: 2.5rem 2rem; transition: background 0.4s ease;
+      cursor: default;
     }
-
-    .stack-card:hover {
-      background: var(--bg-alt);
-      z-index: 1;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
-
+    .stack-card:hover { background: var(--bg-alt); }
     .stack-card-title {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      min-height: 18px; /* Previne pulos durante efeito scramble */
+      font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
+      margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;
+      min-height: 1.2em; font-variant-numeric: tabular-nums;
     }
-
-    .stack-card ul {
-      list-style: none;
-    }
-
-    .stack-card li {
-      font-size: 0.95rem;
-      color: var(--text);
-      padding: 0.6rem 0;
-      border-bottom: 1px dashed var(--line);
-      display: flex;
-      align-items: center;
-      transition: color 0.3s ease, padding-left 0.3s ease;
-    }
-
-    .stack-card:hover li:hover {
-      color: var(--accent);
-      padding-left: 4px;
-    }
-
-    .stack-card li:last-child {
-      border-bottom: none;
-    }
-
-    .stack-card li::before {
-      content: "—";
-      color: var(--text-muted);
-      margin-right: 0.75rem;
-      font-family: var(--mono);
-      transition: color 0.3s ease;
-    }
-
-    .stack-card:hover li:hover::before {
-      color: var(--accent);
-    }
+    .stack-card ul { list-style: none; }
+    .stack-card li { font-size: 0.95rem; color: var(--text-dim); padding: 0.6rem 0; border-bottom: 1px dashed var(--line); display: flex; align-items: center; transition: color 0.3s ease, transform 0.3s ease; }
+    .stack-card li:last-child { border-bottom: none; }
+    .stack-card li::before { content: "—"; color: var(--text-muted); margin-right: 0.75rem; font-family: var(--mono); transition: color 0.3s ease; }
+    .stack-card:hover li { color: var(--text); transform: translateX(4px); }
+    .stack-card:hover li::before { color: var(--accent); }
 
     /* ============ PROJECTS ============ */
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
+    .projects-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
     .project {
-      display: grid;
-      grid-template-columns: 100px 1fr 2fr auto;
-      gap: 2rem;
-      padding: 2.5rem 1rem;
-      border-top: 1px solid var(--line);
-      align-items: baseline;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
-      position: relative;
+      display: grid; grid-template-columns: 80px 1.5fr 2fr auto; gap: 2rem;
+      padding: 2.5rem 1rem; border-bottom: 1px solid var(--line);
+      align-items: baseline; text-decoration: none; color: inherit;
+      transition: all 0.4s var(--transition-smooth); position: relative;
     }
-
     .project::before {
-      content: '';
-      position: absolute;
-      left: -2px;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--accent);
-      transform: scaleY(0);
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transform-origin: center;
-      opacity: 0;
+      content: ''; position: absolute; left: -2px; top: 0; bottom: 0; width: 4px;
+      background: var(--accent); transform: scaleY(0); transform-origin: center;
+      transition: transform 0.4s var(--transition-smooth); opacity: 0;
     }
-
-    .project:last-child {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .project:hover {
-      padding-left: 2.5rem;
-      background: linear-gradient(90deg, rgba(159, 255, 177, 0.03) 0%, transparent 100%);
-    }
-
-    .project:hover::before {
-      transform: scaleY(1);
-      opacity: 1;
-    }
-
-    .project:hover .project-arrow {
-      color: var(--accent);
-      transform: translateX(8px);
-    }
-
-    .project-num {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      transition: color 0.3s ease;
-    }
-
-    .project:hover .project-num {
-      color: var(--accent-dim);
-    }
-
-    .project-name {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 1.6rem;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      transition: color 0.3s ease;
-    }
-
-    .project:hover .project-name {
-      color: white;
-    }
-
-    .project-name em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 300;
-    }
-
-    .project-desc {
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-    }
-
+    .project:hover { padding-left: 2.5rem; background: var(--glow-color); }
+    .project:hover::before { transform: scaleY(1); opacity: 1; }
+    
+    .project-num { font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); }
+    .project-name { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.01em; color: var(--text); transition: color 0.3s ease; }
+    .project-name em { font-style: italic; color: var(--accent); }
+    .project-desc { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
+    
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
     .project-tag {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      padding: 0.3rem 0.6rem;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      transition: all 0.3s ease;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted);
+      padding: 0.3rem 0.6rem; border: 1px solid var(--line); border-radius: 4px;
     }
+    .project:hover .project-tag { border-color: var(--accent-dim); color: var(--text); }
+    .project-arrow { font-family: var(--mono); font-size: 1.2rem; color: var(--text-muted); transition: transform 0.4s var(--transition-smooth); }
+    .project:hover .project-arrow { color: var(--accent); transform: translateX(8px) rotate(-45deg); }
 
-    .project:hover .project-tag {
-      border-color: rgba(159, 255, 177, 0.2);
-      color: var(--text-dim);
-    }
-
-    .project-arrow {
-      font-family: var(--mono);
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    /* ============ CERTS ============ */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
+    /* ============ CERTIFICATIONS ============ */
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
     .cert {
-      padding: 2rem;
-      background: var(--bg-alt);
-      border: 1px solid var(--line);
-      border-left: 3px solid var(--accent-dim);
-      border-radius: 4px;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      padding: 2rem; background: var(--bg-alt); border: 1px solid var(--line);
+      border-left: 3px solid var(--text-muted); border-radius: 8px;
+      transition: all 0.4s var(--transition-smooth); display: flex; flex-direction: column;
     }
-
-    .cert::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at top right, rgba(159, 255, 177, 0.1), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
     .cert:hover {
-      transform: translateY(-6px);
-      border-left-color: var(--accent);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(159, 255, 177, 0.05);
-      background: rgba(26, 26, 30, 0.95);
-      border-color: rgba(159, 255, 177, 0.2);
+      transform: translateY(-4px); border-left-color: var(--accent);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); border-color: var(--line);
+      background: var(--bg);
     }
-
-    .cert:hover::after {
-      opacity: 1;
-    }
-
-    .cert-issuer {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.6rem;
-      min-height: 15px;
-    }
-
-    .cert-name {
-      font-size: 1.05rem;
-      color: var(--text);
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-      font-family: var(--sans);
-      flex-grow: 1;
-    }
-
-    .cert-year {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
+    .cert-issuer { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.6rem; font-variant-numeric: tabular-nums; }
+    .cert-name { font-size: 1.05rem; color: var(--text); font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; flex-grow: 1; }
+    .cert-year { font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; }
     .cert-description {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-      padding-top: 1rem;
-      border-top: 1px dashed var(--line);
-      opacity: 0.6;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      font-size: 0.85rem; color: var(--text-dim); line-height: 1.5;
+      padding-top: 1rem; border-top: 1px dashed var(--line);
+      opacity: 0.6; max-height: 0; overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.5s ease;
     }
-
-    .cert:hover .cert-description {
-      opacity: 1;
-      max-height: 120px;
-      margin-top: auto; /* Empurra pra baixo suavemente */
-    }
-
-    .cert-loading {
-      font-size: 0.7rem;
-      color: var(--accent-dim);
-      font-family: var(--mono);
-      font-style: italic;
-    }
+    .cert:hover .cert-description { opacity: 1; max-height: 120px; margin-top: auto; }
 
     /* ============ CONTACT ============ */
-    .contact {
-      padding: 8rem 0 6rem;
-    }
-
-    .contact-title {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-variation-settings: "opsz" 144, "SOFT" 30;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 3rem;
-      max-width: 800px;
-    }
-
-    .contact-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .contact-list {
-      display: flex;
-      flex-direction: column;
-    }
-
+    .contact-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
     .contact-item {
-      display: grid;
-      grid-template-columns: 120px 1fr auto;
-      gap: 2rem;
-      padding: 2rem 0;
-      border-top: 1px solid var(--line);
-      align-items: center;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
+      display: grid; grid-template-columns: 120px 1fr auto; gap: 2rem;
+      padding: 2.5rem 0; border-bottom: 1px solid var(--line);
+      align-items: center; text-decoration: none; color: var(--text);
+      transition: all 0.4s var(--transition-smooth); position: relative;
     }
-
-    .contact-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(159, 255, 177, 0.02) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: -1;
-    }
-
-    .contact-item:last-child {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .contact-item:hover {
-      padding-left: 1.5rem;
-      color: var(--accent);
-      border-top-color: rgba(159, 255, 177, 0.3);
-    }
-
-    .contact-item:hover + .contact-item {
-      border-top-color: rgba(159, 255, 177, 0.3);
-    }
-
-    .contact-item:hover::before {
-      opacity: 1;
-    }
-
+    .contact-item:hover { padding-left: 1.5rem; color: var(--accent); }
     .contact-label {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      transition: color 0.3s ease;
+      font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s ease;
+      font-variant-numeric: tabular-nums;
     }
-
-    .contact-item:hover .contact-label {
-      color: var(--text-dim);
-    }
-
-    .contact-value {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      letter-spacing: -0.01em;
-    }
-
-    .contact-arrow {
-      font-family: var(--mono);
-      font-size: 1.2rem;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .contact-item:hover .contact-arrow {
-      transform: translateX(10px);
-    }
+    .contact-item:hover .contact-label { color: var(--text-dim); }
+    .contact-value { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.8rem); letter-spacing: -0.01em; }
+    .contact-arrow { font-family: var(--mono); font-size: 1.2rem; color: var(--text-muted); transition: transform 0.4s var(--transition-smooth); }
+    .contact-item:hover .contact-arrow { color: var(--accent); transform: translateX(10px) rotate(-45deg); }
 
     /* ============ FOOTER ============ */
-    footer {
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      background: var(--bg-alt);
-    }
+    footer { padding: 3rem 0; text-align: center; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); background: var(--bg-alt); border-top: 1px solid var(--line); }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
 
     /* ============ ANIMATIONS ============ */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--glow-color); } 50% { opacity: 0.5; box-shadow: 0 0 2px transparent; } }
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-        box-shadow: 0 0 8px rgba(159, 255, 177, 0.4);
-      }
-      50% {
-        opacity: 0.5;
-        transform: scale(0.85);
-        box-shadow: 0 0 2px rgba(159, 255, 177, 0.1);
-      }
-    }
-
-    .js-enabled .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .js-enabled .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .js-enabled .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); will-change: opacity, transform; }
+    .js-enabled .reveal.visible { opacity: 1; transform: translateY(0); }
+    
     section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      transform: scaleX(0);
-      opacity: 0.5;
-      transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: scaleX(0); opacity: 0.5; transition: transform 1.2s var(--transition-smooth);
     }
+    section.visible::before { transform: scaleX(1); }
 
-    section.visible::before {
-      transform: scaleX(1);
-    }
-
-    .stack-card, .cert, .project {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .stack-card.animate, .cert.animate, .project.animate {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .stack-card, .cert, .project { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth); will-change: opacity, transform; }
+    .stack-card.animate, .cert.animate, .project.animate { opacity: 1; transform: translateY(0); }
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
       .container { padding: 0 1.5rem; }
-      nav ul { display: none; }
-      section { padding: 5rem 0; }
-      .hero { padding-top: 7rem; padding-bottom: 3rem; min-height: auto; }
-      .hero-tag { font-size: 0.7rem; margin-bottom: 1.5rem; line-height: 1.5; }
-      .hero-sub { font-size: 1.05rem; margin-bottom: 2rem; }
-      .hero-meta { grid-template-columns: 1fr 1fr; gap: 1.25rem; padding-top: 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .stat-number { font-size: 2.75rem; }
-      .stack-grid { grid-template-columns: 1fr; }
-      .stack-card { padding: 2rem 1.5rem; }
-      .project { grid-template-columns: auto 1fr; gap: 0.5rem 1rem; padding: 2rem 0; }
-      .project-num { grid-row: 1; grid-column: 1; }
-      .project-name { grid-row: 1; grid-column: 2; font-size: 1.3rem; }
-      .project-desc { grid-row: 2; grid-column: 1 / -1; font-size: 0.9rem; }
+      .nav-links { display: none; }
+      .hero { padding-top: 7rem; min-height: auto; }
+      .about-grid, .project { grid-template-columns: 1fr; gap: 2rem; }
+      .project { padding: 2rem 0; }
+      .project-num { display: none; }
       .project-arrow { display: none; }
       .project:hover { padding-left: 1rem; }
-      .certs-grid { grid-template-columns: 1fr; }
-      .contact-item { grid-template-columns: 1fr; gap: 0.3rem; padding: 1.5rem 0; }
-      .contact-label { font-size: 0.7rem; }
-      .contact-value { font-size: 1.1rem; word-break: break-all; }
+      .contact-item { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.5rem 0; }
       .contact-arrow { display: none; }
       .contact-item:hover { padding-left: 0.5rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-      footer .container { flex-direction: column !important; gap: 0.5rem; }
-      .cursor-glow { display: none; } /* Disable custom cursor FX on mobile */
-    }
-
-    @media (max-width: 420px) {
-      .container { padding: 0 1.25rem; }
-      h1 { font-size: 3.5rem; }
-      .hero-sub { font-size: 1rem; }
-      .section-title { font-size: 2rem; margin-bottom: 2.5rem; }
-      .contact-title { font-size: 2.25rem; }
-      .hero-meta { grid-template-columns: 1fr; gap: 1rem; }
+      footer .container { flex-direction: column; gap: 1rem; }
+      .cursor-glow { display: none; }
     }
   </style>
 </head>
 
 <body>
+  <div id="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
-  <div class="cursor-glow"></div>
-
-  <nav id="navbar">
+  <nav id="navbar" aria-label="Main Navigation">
     <div class="container">
-      <div class="logo">victor.martins</div>
-      <ul>
-        <li><a href="#sobre">sobre</a></li>
-        <li><a href="#stack">stack</a></li>
-        <li><a href="#projetos">projetos</a></li>
-        <li><a href="#contato">contato</a></li>
-      </ul>
+      <a href="#" class="logo" aria-label="Victor Martins Home">victor.martins</a>
+      
+      <div class="nav-actions">
+        <ul class="nav-links">
+          <li><a href="#about" data-i18n="nav.about">sobre</a></li>
+          <li><a href="#stack" data-i18n="nav.stack">stack</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">projetos</a></li>
+          <li><a href="#certs" data-i18n="nav.certs">certificações</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">contato</a></li>
+        </ul>
+        
+        <div class="controls">
+          <button id="lang-toggle" class="icon-btn" aria-label="Toggle language (Current: PT)" title="Switch Language">EN</button>
+          <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Switch Theme">
+            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 4.5v-3m0 21v-3m8.485-14.485l-2.121 2.121M5.636 18.364l-2.121 2.121M19.5 12h3m-21 0h3m14.485 8.485l-2.121-2.121M5.636 5.636L3.515 3.515M12 17.25a5.25 5.25 0 110-10.5 5.25 5.25 0 010 10.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="container">
-      <div class="hero-grid" id="parallax-hero">
-        <div class="hero-tag">disponível para vagas · nova iguaçu / rj</div>
-
-        <h1>
-          Victor<br>
-          <span class="italic">Martins</span>
-        </h1>
-
-        <p class="hero-sub">
-          Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk.
-          Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.
-        </p>
-
-        <div class="hero-meta">
-          <div class="meta-item">
-            <span class="meta-label">Status</span>
-            <span class="meta-value"><span class="dot"></span>Open to work</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Cargo-alvo</span>
-            <span class="meta-value">Suporte TI · Help Desk N1</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Localização</span>
-            <span class="meta-value">Rio de Janeiro · BR</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Idiomas</span>
-            <span class="meta-value">PT-BR · EN (C1)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section id="sobre" class="reveal">
-    <div class="container">
-      <div class="section-label">01 / Sobre</div>
-      <h2 class="section-title">
-        19 anos, três anos de técnica acumulados e <em>uma direção clara</em>.
-      </h2>
-
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            Comecei cedo — aos 16 já estava terminando a formação completa de inglês na Wizard,
-            e aos 19 já entrego rotina administrativa em <strong>contrato Petrobras</strong>, em ambiente industrial
-            de alta criticidade na Usina Termelétrica de Seropédica.
+  <main>
+    <header class="hero">
+      <div class="container">
+        <div class="hero-grid" id="parallax-hero">
+          <div class="hero-tag" data-i18n="hero.tag">disponível para vagas · nova iguaçu / rj</div>
+          <h1 data-i18n="hero.title">Victor<br><em>Martins</em></h1>
+          <p class="hero-sub" data-i18n="hero.sub">
+            Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk. 
+            Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.
           </p>
-          <p>
-            Paralelamente, ataco a base técnica que falta: <strong>certificações Google em Technical Support
-              e Networking</strong>, Cisco em Cybersecurity, Microsoft em Office 365 e Azure AI Fundamentals.
-            Documento cada passo publicamente no LinkedIn, com <strong>estudos e projetos em Python</strong>
-            postados semanalmente.
-          </p>
-          <p>
-            Direciono a carreira para Suporte Técnico N1 / Help Desk como primeiro passo formal em TI.
-            Perfil orientado a <strong>registro de chamados, troubleshooting, atendimento ao usuário
-              e escalonamento estruturado</strong>. Com raiz em rotinas de documentação técnica que já
-            pratico no dia a dia.
-          </p>
-        </div>
 
-        <aside class="about-stats">
-          <div class="stat">
-            <span class="stat-number" id="cert-count-num">0</span>
-            <span class="stat-label">certificações em TI, IA, redes e cibersegurança</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">8</span>
-            <span class="stat-label">meses em contrato prestado à Petrobras</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">8</span>
-            <span class="stat-label">anos de formação contínua em inglês (Wizard, W12)</span>
-          </div>
-        </aside>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="stack" class="reveal">
-    <div class="container">
-      <div class="section-label">02 / Stack técnica</div>
-      <h2 class="section-title">
-        Ferramentas, sistemas e <em>conceitos</em> que domino ou tenho base sólida.
-      </h2>
-
-      <div class="stack-grid">
-        <div class="stack-card scramble-target">
-          <div class="stack-card-title">Suporte &amp; Sistemas</div>
-          <ul>
-            <li>Troubleshooting de hardware e software</li>
-            <li>Registro e acompanhamento de chamados</li>
-            <li>Atendimento ao usuário</li>
-            <li>Windows 10 / 11</li>
-            <li>Fundamentos de Hardware</li>
-          </ul>
-        </div>
-
-        <div class="stack-card scramble-target">
-          <div class="stack-card-title">Redes &amp; Segurança</div>
-          <ul>
-            <li>TCP/IP, DNS, DHCP</li>
-            <li>Modelo OSI</li>
-            <li>Fundamentos de Cibersegurança</li>
-            <li>LGPD</li>
-            <li>Boas práticas de senhas e phishing</li>
-          </ul>
-        </div>
-
-        <div class="stack-card scramble-target">
-          <div class="stack-card-title">Microsoft 365</div>
-          <ul>
-            <li>Word, Excel, PowerPoint</li>
-            <li>Outlook, OneDrive, Teams</li>
-            <li>Azure AI-900 Fundamentals</li>
-            <li>Copilot &amp; automação básica</li>
-          </ul>
-        </div>
-
-        <div class="stack-card scramble-target">
-          <div class="stack-card-title">Programação</div>
-          <ul>
-            <li>Python — controle de fluxo, POO</li>
-            <li>Manipulação de arquivos, try/except</li>
-            <li>Lógica de programação (Portugol)</li>
-            <li>Git / GitHub (em adoção)</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="projetos" class="reveal">
-    <div class="container">
-      <div class="section-label">03 / Projetos</div>
-      <h2 class="section-title">
-        Construído para <em>aprender</em>, publicado para <em>provar</em>.
-      </h2>
-
-      <div class="projects-list">
-
-        <div class="project scramble-target">
-          <span class="project-num">01</span>
-          <div>
-            <div class="project-name">Polimorfismo em <em>Python</em></div>
-            <div class="project-tags">
-              <span class="project-tag">python</span>
-              <span class="project-tag">POO</span>
-              <span class="project-tag">design</span>
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="meta.statusLabel">Status</span>
+              <span class="meta-value"><span class="dot"></span><span data-i18n="meta.status">Open to work</span></span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="meta.roleLabel">Cargo-alvo</span>
+              <span class="meta-value" data-i18n="meta.role">Suporte TI · Help Desk N1</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="meta.locLabel">Localização</span>
+              <span class="meta-value" data-i18n="meta.loc">Rio de Janeiro · BR</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="meta.langLabel">Idiomas</span>
+              <span class="meta-value" data-i18n="meta.lang">PT-BR · EN (C1)</span>
             </div>
           </div>
-          <div class="project-desc">
-            Dois projetos aplicando polimorfismo: calculadora de áreas geométricas
-            (quadrado, retângulo, círculo) e sistema de pagamentos (Pix, Cartão, Boleto)
-            — mesmo método, comportamentos distintos, zero checagem de tipo.
-          </div>
-          <span class="project-arrow">→</span>
         </div>
-
-        <div class="project scramble-target">
-          <span class="project-num">02</span>
-          <div>
-            <div class="project-name">Sistema de <em>Cachorros &amp; Dono</em></div>
-            <div class="project-tags">
-              <span class="project-tag">python</span>
-              <span class="project-tag">POO</span>
-              <span class="project-tag">classes</span>
-            </div>
-          </div>
-          <div class="project-desc">
-            Primeira imersão em classes com <code>__init__</code>, self e composição entre objetos.
-            Classe Dono gerencia lista de Cachorros — adotar, alimentar, brincar, ver status.
-          </div>
-          <span class="project-arrow">→</span>
-        </div>
-
-        <div class="project scramble-target">
-          <span class="project-num">03</span>
-          <div>
-            <div class="project-name">Diário com <em>persistência</em></div>
-            <div class="project-tags">
-              <span class="project-tag">python</span>
-              <span class="project-tag">file i/o</span>
-              <span class="project-tag">cli</span>
-            </div>
-          </div>
-          <div class="project-desc">
-            Aplicação de terminal com leitura e escrita em arquivo, tratamento de exceções
-            e interface limpa. Primeiro projeto em que os dados sobrevivem ao fechamento do programa.
-          </div>
-          <span class="project-arrow">→</span>
-        </div>
-
-        <div class="project scramble-target">
-          <span class="project-num">04</span>
-          <div>
-            <div class="project-name">Calculadora <em>robusta</em></div>
-            <div class="project-tags">
-              <span class="project-tag">python</span>
-              <span class="project-tag">try/except</span>
-              <span class="project-tag">loops</span>
-            </div>
-          </div>
-          <div class="project-desc">
-            Calculadora no terminal com cinco operações, validação de entrada, loops de repetição
-            e tratamento de exceções — feita para resistir a todo tipo de input inválido.
-          </div>
-          <span class="project-arrow">→</span>
-        </div>
-
-        <div class="project scramble-target">
-          <span class="project-num">05</span>
-          <div>
-            <div class="project-name">Monitoramento de <em>sensor industrial</em></div>
-            <div class="project-tags">
-              <span class="project-tag">portugol</span>
-              <span class="project-tag">algoritmos</span>
-              <span class="project-tag">acadêmico</span>
-            </div>
-          </div>
-          <div class="project-desc">
-            Projeto acadêmico (UVA) que simula a leitura de 150 valores de sensor em esteira
-            industrial, com modularização por funções, uso de vetores e estruturas condicionais.
-          </div>
-          <span class="project-arrow">→</span>
-        </div>
-
       </div>
+    </header>
 
-    </div>
-  </section>
+    <section id="about" class="reveal">
+      <div class="container">
+        <div class="section-label" data-i18n="about.label">01 / Sobre</div>
+        <h2 class="section-title" data-i18n="about.title">19 anos, base técnica consolidada e <em>uma direção clara</em>.</h2>
 
-  <section id="certificacoes" class="reveal">
-    <div class="container">
-      <div class="section-label">04 / Certificações</div>
-      <h2 class="section-title">
-        <span id="cert-count">0</span> certificados. A base <em>que importa</em> primeiro.
-      </h2>
+        <div class="about-grid">
+          <article class="about-text">
+            <p data-i18n="about.p1">Comecei cedo — aos 16 finalizei a formação de inglês na Wizard, e aos 19 já gerencio rotinas em <strong>contrato Petrobras</strong>, em ambiente industrial de alta criticidade na Usina Termelétrica de Seropédica.</p>
+            <p data-i18n="about.p2">Paralelamente, ataco a base técnica: <strong>certificações Google em Technical Support e Networking</strong>, Cisco em Cybersecurity, Microsoft em Office 365 e Azure AI. Documento cada passo publicamente no LinkedIn e GitHub.</p>
+            <p data-i18n="about.p3">Foco total em Suporte Técnico N1 / Help Desk. Perfil orientado a <strong>registro de chamados, troubleshooting, atendimento ao usuário e escalonamento estruturado</strong>.</p>
+          </article>
 
-      <div class="certs-grid">
-
-        <div class="cert scramble-target" data-cert="technical-support-fundamentals">
-          <div class="cert-issuer">Google</div>
-          <div class="cert-name">Technical Support Fundamentals</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
+          <aside class="about-stats" aria-label="Estatísticas Rápidas">
+            <div class="stat">
+              <span class="stat-number" id="cert-count-num">10</span>
+              <span class="stat-label" data-i18n="about.stat1">certificações em TI, IA, redes e segurança</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">8</span>
+              <span class="stat-label" data-i18n="about.stat2">meses de contrato prestado à Petrobras</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">8</span>
+              <span class="stat-label" data-i18n="about.stat3">anos de formação contínua em inglês</span>
+            </div>
+          </aside>
         </div>
-
-        <div class="cert scramble-target" data-cert="bits-bytes-networking">
-          <div class="cert-issuer">Google</div>
-          <div class="cert-name">The Bits and Bytes of Computer Networking</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="cybersecurity-intro">
-          <div class="cert-issuer">Cisco</div>
-          <div class="cert-name">Introduction to Cybersecurity</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="azure-ai-900">
-          <div class="cert-issuer">Microsoft</div>
-          <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="office-365">
-          <div class="cert-issuer">Fundação Bradesco</div>
-          <div class="cert-name">Microsoft Office 365</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="hardware-software">
-          <div class="cert-issuer">Fundação Bradesco</div>
-          <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
-          <div class="cert-year">2024</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="lgpd">
-          <div class="cert-issuer">Fundação Bradesco</div>
-          <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="gemini-enterprise">
-          <div class="cert-issuer">Google Cloud</div>
-          <div class="cert-name">Introdução ao Gemini Enterprise</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="hubspot-ai">
-          <div class="cert-issuer">Coursera</div>
-          <div class="cert-name">Marketing Automation with AI and HubSpot</div>
-          <div class="cert-year">2026</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
-        <div class="cert scramble-target" data-cert="coca-cola-coletivo">
-          <div class="cert-issuer">Instituto Coca-Cola Brasil</div>
-          <div class="cert-name">Coletivo Online - Mercado de Trabalho</div>
-          <div class="cert-year">Novembro 2025 (11h)</div>
-          <div class="cert-description cert-loading">Carregando...</div>
-        </div>
-
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section id="stack" class="reveal">
+      <div class="container">
+        <div class="section-label" data-i18n="stack.label">02 / Stack Técnica</div>
+        <h2 class="section-title" data-i18n="stack.title">Sistemas e ferramentas que formam a minha <em>base</em>.</h2>
 
-  <section id="contato" class="contact reveal">
-    <div class="container">
-      <div class="section-label">05 / Contato</div>
-      <h2 class="contact-title">
-        Procurando alguém <em>pronto para começar?</em>
-      </h2>
+        <div class="stack-grid">
+          <article class="stack-card">
+            <h3 class="stack-card-title scramble-target" data-i18n="stack.support.title">Suporte & Sistemas</h3>
+            <ul>
+              <li data-i18n="stack.support.l1">Troubleshooting de HW/SW</li>
+              <li data-i18n="stack.support.l2">Registro e gestão de chamados</li>
+              <li data-i18n="stack.support.l3">Atendimento corporativo</li>
+              <li data-i18n="stack.support.l4">Windows 10 / 11</li>
+              <li data-i18n="stack.support.l5">Fundamentos de Hardware</li>
+            </ul>
+          </article>
 
-      <div class="contact-list">
+          <article class="stack-card">
+            <h3 class="stack-card-title scramble-target" data-i18n="stack.network.title">Redes & Segurança</h3>
+            <ul>
+              <li data-i18n="stack.network.l1">TCP/IP, DNS, DHCP</li>
+              <li data-i18n="stack.network.l2">Modelo OSI e Roteamento</li>
+              <li data-i18n="stack.network.l3">Fundamentos de Cibersegurança</li>
+              <li data-i18n="stack.network.l4">LGPD e Conformidade</li>
+            </ul>
+          </article>
 
-        <a href="mailto:byvictormartinsreis@gmail.com" class="contact-item scramble-target">
-          <span class="contact-label">Email</span>
-          <span class="contact-value">byvictormartinsreis@gmail.com</span>
-          <span class="contact-arrow">→</span>
-        </a>
+          <article class="stack-card">
+            <h3 class="stack-card-title scramble-target" data-i18n="stack.ms.title">Microsoft 365</h3>
+            <ul>
+              <li data-i18n="stack.ms.l1">Word, Excel, PowerPoint</li>
+              <li data-i18n="stack.ms.l2">Outlook, OneDrive, Teams</li>
+              <li data-i18n="stack.ms.l3">Azure AI-900 Fundamentals</li>
+              <li data-i18n="stack.ms.l4">Copilot & automação básica</li>
+            </ul>
+          </article>
 
-        <a href="https://www.linkedin.com/in/victor-martins-2176b4360" target="_blank" rel="noopener"
-          class="contact-item scramble-target">
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-value">/in/victor-martins-2176b4360</span>
-          <span class="contact-arrow">→</span>
-        </a>
-
-        <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="contact-item scramble-target">
-          <span class="contact-label">GitHub</span>
-          <span class="contact-value">/victormrreis</span>
-          <span class="contact-arrow">→</span>
-        </a>
-
-        <a href="https://wa.me/5521973581707" target="_blank" rel="noopener" class="contact-item scramble-target">
-          <span class="contact-label">WhatsApp</span>
-          <span class="contact-value">+55 (21) 97358-1707</span>
-          <span class="contact-arrow">→</span>
-        </a>
-
+          <article class="stack-card">
+            <h3 class="stack-card-title scramble-target" data-i18n="stack.dev.title">Programação</h3>
+            <ul>
+              <li data-i18n="stack.dev.l1">Python (POO, I/O, Exceções)</li>
+              <li data-i18n="stack.dev.l2">Git & GitHub Básico</li>
+              <li data-i18n="stack.dev.l3">Lógica de Programação</li>
+              <li data-i18n="stack.dev.l4">HTML/CSS (Web Base)</li>
+            </ul>
+          </article>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section id="projects" class="reveal">
+      <div class="container">
+        <div class="section-label" data-i18n="proj.label">03 / Projetos</div>
+        <h2 class="section-title" data-i18n="proj.title">Construído para <em>aprender</em>, publicado para <em>provar</em>.</h2>
+
+        <div class="projects-list">
+          <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="project" aria-label="Ver projeto Polimorfismo no GitHub">
+            <span class="project-num scramble-target">01</span>
+            <div>
+              <h3 class="project-name" data-i18n="proj.p1.title">Polimorfismo em <em>Python</em></h3>
+              <div class="project-tags">
+                <span class="project-tag">python</span><span class="project-tag">POO</span><span class="project-tag">design</span>
+              </div>
+            </div>
+            <p class="project-desc" data-i18n="proj.p1.desc">Calculadora de áreas e sistema de pagamentos simulados aplicando polimorfismo puro. Mesmos métodos, comportamentos distintos.</p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="project" aria-label="Ver projeto Cachorros no GitHub">
+            <span class="project-num scramble-target">02</span>
+            <div>
+              <h3 class="project-name" data-i18n="proj.p2.title">Sistema de <em>Cachorros & Dono</em></h3>
+              <div class="project-tags">
+                <span class="project-tag">python</span><span class="project-tag">POO</span><span class="project-tag">classes</span>
+              </div>
+            </div>
+            <p class="project-desc" data-i18n="proj.p2.desc">Primeira imersão em classes com `__init__`, self e composição entre objetos. Classe Dono gerencia lista de Cachorros.</p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="project" aria-label="Ver projeto CLI no GitHub">
+            <span class="project-num scramble-target">03</span>
+            <div>
+              <h3 class="project-name" data-i18n="proj.p3.title">Diário <em>CLI Persistente</em></h3>
+              <div class="project-tags">
+                <span class="project-tag">python</span><span class="project-tag">file i/o</span><span class="project-tag">cli</span>
+              </div>
+            </div>
+            <p class="project-desc" data-i18n="proj.p3.desc">Aplicação de terminal com leitura/escrita em arquivo `.txt`, tratamento robusto de exceções e interface limpa.</p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="project" aria-label="Ver projeto Calculadora no GitHub">
+            <span class="project-num scramble-target">04</span>
+            <div>
+              <h3 class="project-name" data-i18n="proj.p4.title">Calculadora <em>robusta</em></h3>
+              <div class="project-tags">
+                <span class="project-tag">python</span><span class="project-tag">try/except</span><span class="project-tag">loops</span>
+              </div>
+            </div>
+            <p class="project-desc" data-i18n="proj.p4.desc">Calculadora no terminal com validação de entrada, loops de repetição e tratamento de exceções para resistir a inputs inválidos.</p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="project" aria-label="Ver projeto Monitoramento no GitHub">
+            <span class="project-num scramble-target">05</span>
+            <div>
+              <h3 class="project-name" data-i18n="proj.p5.title">Monitoramento <em>Industrial</em></h3>
+              <div class="project-tags">
+                <span class="project-tag">algoritmos</span><span class="project-tag">lógica</span>
+              </div>
+            </div>
+            <p class="project-desc" data-i18n="proj.p5.desc">Projeto acadêmico simulando leitura de 150 valores de sensores em esteira. Foco em modularização e vetores.</p>
+            <span class="project-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="certs" class="reveal">
+      <div class="container">
+        <div class="section-label" data-i18n="cert.label">04 / Certificações</div>
+        <h2 class="section-title" data-i18n="cert.title">A base teórica e prática <em>que importa</em> primeiro.</h2>
+
+        <div class="certs-grid">
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Google</span>
+            <h3 class="cert-name" data-i18n="cert.g1.title">Technical Support Fundamentals</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.g1.desc">Diagnóstico de problemas, registro de chamados, soft skills para Help Desk e estrutura base de suporte de TI.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Google</span>
+            <h3 class="cert-name" data-i18n="cert.g2.title">Bits & Bytes of Networking</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.g2.desc">Aprofundamento em modelo OSI, protocolos TCP/IP, DNS, DHCP, ferramentas de rede e troubleshooting LAN/WAN.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Cisco</span>
+            <h3 class="cert-name" data-i18n="cert.c1.title">Introduction to Cybersecurity</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.c1.desc">Ameaças globais, criptografia básica, boas práticas de senhas corporativas e defesa contra engenharia social/phishing.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Microsoft</span>
+            <h3 class="cert-name" data-i18n="cert.m1.title">AI-900 · Azure AI Fundamentals</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.m1.desc">Princípios de Machine Learning, Visão Computacional, NLP e desenvolvimento ético utilizando o ecossistema Azure.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Fundação Bradesco</span>
+            <h3 class="cert-name" data-i18n="cert.b1.title">Microsoft Office 365</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.b1.desc">Domínio corporativo das ferramentas Word, Excel, Teams, Outlook e OneDrive para colaboração e suporte de primeiro nível.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Fundação Bradesco</span>
+            <h3 class="cert-name" data-i18n="cert.b2.title">Hardware e Software</h3>
+            <span class="cert-year">2024</span>
+            <p class="cert-description" data-i18n="cert.b2.desc">Estrutura física de PCs (CPU, RAM, Placas-mãe), periféricos, processos de montagem e instalação de Sistemas Operacionais.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Fundação Bradesco</span>
+            <h3 class="cert-name" data-i18n="cert.b3.title">LGPD</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.b3.desc">Conformidade com a Lei Geral de Proteção de Dados, privacidade e direitos do usuário.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Google Cloud</span>
+            <h3 class="cert-name" data-i18n="cert.g3.title">Gemini Enterprise</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.g3.desc">Introdução ao uso de IA generativa em ambientes corporativos e Google Workspace.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Coursera</span>
+            <h3 class="cert-name" data-i18n="cert.c2.title">Marketing Automation with AI</h3>
+            <span class="cert-year">2026</span>
+            <p class="cert-description" data-i18n="cert.c2.desc">Uso de IA e HubSpot para automação de fluxos e análise de dados de marketing.</p>
+          </article>
+
+          <article class="cert">
+            <span class="cert-issuer scramble-target">Instituto Coca-Cola</span>
+            <h3 class="cert-name" data-i18n="cert.c3.title">Coletivo Online</h3>
+            <span class="cert-year">2025</span>
+            <p class="cert-description" data-i18n="cert.c3.desc">Desenvolvimento de soft skills para o mercado de trabalho moderno.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="container">
+        <div class="section-label" data-i18n="cont.label">05 / Contato</div>
+        <h2 class="section-title" data-i18n="cont.title">Procurando alguém <em>pronto para somar?</em></h2>
+
+        <address class="contact-list" style="font-style: normal;">
+          <a href="mailto:byvictormartinsreis@gmail.com" class="contact-item" aria-label="Enviar Email">
+            <span class="contact-label scramble-target" data-i18n="cont.email">Email</span>
+            <span class="contact-value">byvictormartinsreis@gmail.com</span>
+            <span class="contact-arrow">→</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/victor-martins-2176b4360" target="_blank" rel="noopener" class="contact-item" aria-label="Perfil LinkedIn">
+            <span class="contact-label scramble-target">LinkedIn</span>
+            <span class="contact-value">/in/victor-martins-2176b4360</span>
+            <span class="contact-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="contact-item" aria-label="Perfil GitHub">
+            <span class="contact-label scramble-target">GitHub</span>
+            <span class="contact-value">/victormrreis</span>
+            <span class="contact-arrow">→</span>
+          </a>
+
+          <a href="https://wa.me/5521973581707" target="_blank" rel="noopener" class="contact-item" aria-label="Enviar WhatsApp">
+            <span class="contact-label scramble-target">WhatsApp</span>
+            <span class="contact-value">+55 (21) 97358-1707</span>
+            <span class="contact-arrow">→</span>
+          </a>
+        </address>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-      <span>© 2026 Victor Martins</span>
-      <span>Construído em HTML &amp; CSS · Hospedado no GitHub Pages</span>
+    <div class="container">
+      <span>© <span id="current-year">2026</span> Victor Martins</span>
+      <span data-i18n="footer.built">Design focado em conversão. Hospedado no GitHub Pages.</span>
     </div>
   </footer>
 
   <script>
-    // Configurações e utilitários
-    const easeOut = t => 1 - Math.pow(1 - t, 3);
     document.documentElement.classList.add('js-enabled');
+    document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Nav Scroll Effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+    /* ========================================================
+       I18N (INTERNATIONALIZATION) SYSTEM
+       ======================================================== */
+    const translations = {
+      pt: {
+        "nav.about": "sobre", "nav.stack": "stack", "nav.projects": "projetos", "nav.certs": "certificações", "nav.contact": "contato",
+        "hero.tag": "disponível para vagas · nova iguaçu / rj",
+        "hero.title": "Victor<br><em>Martins</em>",
+        "hero.sub": "Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk. Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.",
+        "meta.statusLabel": "Status", "meta.status": "Open to work",
+        "meta.roleLabel": "Cargo-alvo", "meta.role": "Suporte TI · Help Desk N1",
+        "meta.locLabel": "Localização", "meta.loc": "Rio de Janeiro · BR",
+        "meta.langLabel": "Idiomas", "meta.lang": "PT-BR · EN (C1)",
+        "about.label": "01 / Sobre",
+        "about.title": "19 anos, base técnica consolidada e <em>uma direção clara</em>.",
+        "about.p1": "Comecei cedo — aos 16 finalizei a formação de inglês na Wizard, e aos 19 já gerencio rotinas em <strong>contrato Petrobras</strong>, em ambiente industrial de alta criticidade na Usina Termelétrica de Seropédica.",
+        "about.p2": "Paralelamente, ataco a base técnica: <strong>certificações Google em Technical Support e Networking</strong>, Cisco em Cybersecurity, Microsoft em Office 365 e Azure AI. Documento cada passo publicamente no LinkedIn e GitHub.",
+        "about.p3": "Foco total em Suporte Técnico N1 / Help Desk. Perfil orientado a <strong>registro de chamados, troubleshooting, atendimento ao usuário e escalonamento estruturado</strong>.",
+        "about.stat1": "certificações em TI, IA, redes e segurança",
+        "about.stat2": "meses de contrato prestado à Petrobras",
+        "about.stat3": "anos de formação contínua em inglês",
+        "stack.label": "02 / Stack Técnica", "stack.title": "Sistemas e ferramentas que formam a minha <em>base</em>.",
+        "stack.support.title": "Suporte & Sistemas", "stack.support.l1": "Troubleshooting HW/SW", "stack.support.l2": "Registro e gestão de chamados", "stack.support.l3": "Atendimento corporativo", "stack.support.l4": "Windows 10 / 11", "stack.support.l5": "Fundamentos de Hardware",
+        "stack.network.title": "Redes & Segurança", "stack.network.l1": "TCP/IP, DNS, DHCP", "stack.network.l2": "Modelo OSI e Roteamento", "stack.network.l3": "Fundamentos de Cybersecurity", "stack.network.l4": "LGPD e Conformidade",
+        "stack.ms.title": "Microsoft 365", "stack.ms.l1": "Word, Excel, PowerPoint", "stack.ms.l2": "Outlook, OneDrive, Teams", "stack.ms.l3": "Azure AI-900 Fundamentals", "stack.ms.l4": "Copilot & automação básica",
+        "stack.dev.title": "Programação", "stack.dev.l1": "Python (POO, I/O, Exceções)", "stack.dev.l2": "Git & GitHub Básico", "stack.dev.l3": "Lógica de Programação", "stack.dev.l4": "HTML/CSS (Web Base)",
+        "proj.label": "03 / Projetos", "proj.title": "Construído para <em>aprender</em>, publicado para <em>provar</em>.",
+        "proj.p1.title": "Polimorfismo em <em>Python</em>", "proj.p1.desc": "Calculadora de áreas e sistema de pagamentos simulados aplicando polimorfismo puro. Mesmos métodos, comportamentos distintos.",
+        "proj.p2.title": "Sistema de <em>Cachorros & Dono</em>", "proj.p2.desc": "Primeira imersão em classes com `__init__`, self e composição entre objetos. Classe Dono gerencia lista de Cachorros.",
+        "proj.p3.title": "Diário <em>CLI Persistente</em>", "proj.p3.desc": "Aplicação de terminal com leitura/escrita em arquivo `.txt`, tratamento robusto de exceções e interface limpa.",
+        "proj.p4.title": "Calculadora <em>robusta</em>", "proj.p4.desc": "Calculadora no terminal com validação de entrada, loops de repetição e tratamento de exceções para resistir a inputs inválidos.",
+        "proj.p5.title": "Monitoramento <em>Industrial</em>", "proj.p5.desc": "Projeto acadêmico simulando leitura de 150 valores de sensores em esteira. Foco em modularização e vetores.",
+        "cert.label": "04 / Certificações", "cert.title": "A base teórica e prática <em>que importa</em> primeiro.",
+        "cert.g1.title": "Technical Support Fundamentals", "cert.g1.desc": "Diagnóstico de problemas, registro de chamados, soft skills para Help Desk e estrutura base de suporte de TI.",
+        "cert.g2.title": "Bits & Bytes of Networking", "cert.g2.desc": "Aprofundamento em modelo OSI, protocolos TCP/IP, DNS, DHCP, ferramentas de rede e troubleshooting LAN/WAN.",
+        "cert.c1.title": "Introduction to Cybersecurity", "cert.c1.desc": "Ameaças globais, criptografia básica, boas práticas de senhas corporativas e defesa contra engenharia social/phishing.",
+        "cert.m1.title": "AI-900 · Azure AI Fundamentals", "cert.m1.desc": "Princípios de Machine Learning, Visão Computacional, NLP e desenvolvimento ético utilizando o ecossistema Azure.",
+        "cert.b1.title": "Microsoft Office 365", "cert.b1.desc": "Domínio corporativo das ferramentas Word, Excel, Teams, Outlook e OneDrive para colaboração e suporte de primeiro nível.",
+        "cert.b2.title": "Hardware e Software", "cert.b2.desc": "Estrutura física de PCs (CPU, RAM, Placas-mãe), periféricos, processos de montagem e instalação de Sistemas Operacionais.",
+        "cert.b3.title": "LGPD", "cert.b3.desc": "Conformidade com a Lei Geral de Proteção de Dados, privacidade e direitos do usuário.",
+        "cert.g3.title": "Gemini Enterprise", "cert.g3.desc": "Introdução ao uso de IA generativa em ambientes corporativos e Google Workspace.",
+        "cert.c2.title": "Marketing Automation with AI", "cert.c2.desc": "Uso de IA e HubSpot para automação de fluxos e análise de dados de marketing.",
+        "cert.c3.title": "Coletivo Online", "cert.c3.desc": "Desenvolvimento de soft skills para o mercado de trabalho moderno.",
+        "cont.label": "05 / Contato", "cont.title": "Procurando alguém <em>pronto para somar?</em>", "cont.email": "Email",
+        "footer.built": "Design focado em conversão. Hospedado no GitHub Pages."
+      },
+      en: {
+        "nav.about": "about", "nav.stack": "stack", "nav.projects": "projects", "nav.certs": "certifications", "nav.contact": "contact",
+        "hero.tag": "open to work · nova iguaçu / br",
+        "hero.title": "Victor<br><em>Martins</em>",
+        "hero.sub": "Computer Engineering student transitioning to Tech Support and Help Desk. Solid foundation in networks, systems, and automation — backed by Google, Cisco, and Microsoft certs.",
+        "meta.statusLabel": "Status", "meta.status": "Open to work",
+        "meta.roleLabel": "Target Role", "meta.role": "IT Support · Help Desk L1",
+        "meta.locLabel": "Location", "meta.loc": "Rio de Janeiro · BR",
+        "meta.langLabel": "Languages", "meta.lang": "PT-BR · EN (C1 Fluent)",
+        "about.label": "01 / About",
+        "about.title": "19 y/o, solid technical foundation and <em>a clear direction</em>.",
+        "about.p1": "I started early — finished a full English program at 16, and at 19 I manage daily routines under a <strong>Petrobras contract</strong> in a highly critical industrial environment (Seropédica Thermoelectric Plant).",
+        "about.p2": "In parallel, I am building my technical core: <strong>Google certifications in Tech Support & Networking</strong>, Cisco in Cybersecurity, Microsoft in O365 and Azure AI. I document my journey publicly on LinkedIn and GitHub.",
+        "about.p3": "My focus is exclusively on Level 1 Tech Support / Help Desk. My profile is driven by <strong>ticketing, troubleshooting, customer service, and structured escalation</strong>.",
+        "about.stat1": "certifications in IT, AI, networking & security",
+        "about.stat2": "months acting under a Petrobras B2B contract",
+        "about.stat3": "years of continuous English training",
+        "stack.label": "02 / Tech Stack", "stack.title": "Systems and tools that form my <em>foundation</em>.",
+        "stack.support.title": "Support & Systems", "stack.support.l1": "HW/SW Troubleshooting", "stack.support.l2": "Ticketing & Issue Tracking", "stack.support.l3": "Corporate Customer Service", "stack.support.l4": "Windows 10 / 11", "stack.support.l5": "Hardware Fundamentals",
+        "stack.network.title": "Network & Security", "stack.network.l1": "TCP/IP, DNS, DHCP", "stack.network.l2": "OSI Model & Routing", "stack.network.l3": "Cybersecurity Fundamentals", "stack.network.l4": "Data Privacy (LGPD)",
+        "stack.ms.title": "Microsoft 365", "stack.ms.l1": "Word, Excel, PowerPoint", "stack.ms.l2": "Outlook, OneDrive, Teams", "stack.ms.l3": "Azure AI-900 Fundamentals", "stack.ms.l4": "Copilot & basic automation",
+        "stack.dev.title": "Programming", "stack.dev.l1": "Python (OOP, I/O, Exceptions)", "stack.dev.l2": "Git & GitHub Versioning", "stack.dev.l3": "Algorithmic Logic", "stack.dev.l4": "HTML/CSS (Web Basics)",
+        "proj.label": "03 / Projects", "proj.title": "Built to <em>learn</em>, published to <em>prove</em>.",
+        "proj.p1.title": "Polymorphism in <em>Python</em>", "proj.p1.desc": "Area calculator and payment systems simulating pure polymorphism. Same methods, different behaviors.",
+        "proj.p2.title": "<em>Dogs & Owner</em> System", "proj.p2.desc": "First immersion in classes with `__init__`, self, and object composition. Owner class manages a list of Dogs.",
+        "proj.p3.title": "Persistent <em>CLI Diary</em>", "proj.p3.desc": "Terminal app with `.txt` file read/write operations, robust exception handling, and clean UX.",
+        "proj.p4.title": "<em>Robust</em> Calculator", "proj.p4.desc": "Terminal calculator with input validation, repetition loops, and exception handling to resist all types of invalid input.",
+        "proj.p5.title": "Industrial <em>Monitoring</em>", "proj.p5.desc": "Academic project parsing 150 sensor values from an assembly line. Focused on modularization and arrays.",
+        "cert.label": "04 / Certifications", "cert.title": "The theoretical and practical <em>foundation</em> first.",
+        "cert.g1.title": "Technical Support Fundamentals", "cert.g1.desc": "Troubleshooting, ticketing systems, customer service soft skills, and basic IT support structures.",
+        "cert.g2.title": "Bits & Bytes of Networking", "cert.g2.desc": "Deep dive into OSI model, TCP/IP, DNS, DHCP, networking tools, and LAN/WAN troubleshooting.",
+        "cert.c1.title": "Introduction to Cybersecurity", "cert.c1.desc": "Global threats, cryptography basics, corporate password policies, and defense against social engineering.",
+        "cert.m1.title": "AI-900 · Azure AI Fundamentals", "cert.m1.desc": "Machine Learning principles, Computer Vision, NLP, and ethical AI development using Microsoft Azure.",
+        "cert.b1.title": "Microsoft Office 365", "cert.b1.desc": "Corporate mastery of Word, Excel, Teams, Outlook, and OneDrive for team collaboration and L1 support.",
+        "cert.b2.title": "Hardware and Software", "cert.b2.desc": "PC physical structure (CPU, RAM), peripherals, assembly processes, and OS installations.",
+        "cert.b3.title": "LGPD", "cert.b3.desc": "Compliance with General Data Protection Law, privacy, and user rights.",
+        "cert.g3.title": "Gemini Enterprise", "cert.g3.desc": "Introduction to generative AI in corporate environments and Google Workspace.",
+        "cert.c2.title": "Marketing Automation with AI", "cert.c2.desc": "Using AI and HubSpot for workflow automation and marketing data analysis.",
+        "cert.c3.title": "Coletivo Online", "cert.c3.desc": "Soft skills development for the modern job market.",
+        "cont.label": "05 / Contact", "cont.title": "Looking for someone <em>ready to add value?</em>", "cont.email": "Email",
+        "footer.built": "Conversion-focused design. Hosted on GitHub Pages."
       }
+    };
+
+    let currentLang = 'pt';
+    const langBtn = document.getElementById('lang-toggle');
+
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'pt' ? 'en' : 'pt';
+      document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+      langBtn.textContent = currentLang === 'pt' ? 'EN' : 'PT';
+      langBtn.setAttribute('aria-label', `Toggle language (Current: ${currentLang.toUpperCase()})`);
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
+        }
+      });
     });
 
-    // Custom Cursor Glow FX
+    /* ========================================================
+       THEME TOGGLE (DARK / LIGHT)
+       ======================================================== */
+    const themeBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    root.setAttribute('data-theme', savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = root.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+
+    /* ========================================================
+       SCROLL PROGRESS & NAVBAR
+       ======================================================== */
+    const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scroll-progress');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      scrollProgress.style.width = scrolled + "%";
+    }, { passive: true });
+
+    /* ========================================================
+       CURSOR GLOW FX
+       ======================================================== */
     const cursorGlow = document.querySelector('.cursor-glow');
     document.addEventListener('mousemove', (e) => {
-      // Usar requestAnimationFrame para performance se necessário, mas transform é rápido
       cursorGlow.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
-    });
+    }, { passive: true });
 
-    // Hero Parallax sutil
     const parallaxHero = document.getElementById('parallax-hero');
     document.addEventListener('mousemove', (e) => {
       if(window.innerWidth > 900) {
         const x = (window.innerWidth / 2 - e.pageX) / 100;
         const y = (window.innerHeight / 2 - e.pageY) / 100;
-        parallaxHero.style.transform = `translate(${x}px, ${y}px)`;
+        parallaxHero.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       }
+    }, { passive: true });
+
+    /* ========================================================
+       SCRAMBLE EFFECT
+       ======================================================== */
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+    document.querySelectorAll('.scramble-target').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        const target = el.querySelector('.stack-card-title, .project-num, .cert-issuer, .contact-label, .project-name') || el;
+        if (target.dataset.scrambling === "true") return;
+        
+        target.dataset.scrambling = "true";
+        const originalText = target.innerText;
+        let iterations = 0;
+
+        const interval = setInterval(() => {
+          target.innerText = originalText.split("").map((letter, index) => {
+            if(index < iterations || letter === " " || letter === "\n") return originalText[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join("");
+          
+          if(iterations >= originalText.length) {
+            clearInterval(interval);
+            target.dataset.scrambling = "false";
+            target.innerHTML = originalText;
+          }
+          iterations += 1 / 2;
+        }, 30);
+      });
     });
 
-    // Animação Numérica
-    let counterAnimated = false;
-    const animateCounter = (el, target, duration = 1200) => {
-      let startTime = null;
-      const update = (timestamp) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        const eased = easeOut(progress);
-        const value = Math.floor(eased * target);
-        el.textContent = value;
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        } else {
-          el.textContent = target;
-        }
-      };
-      requestAnimationFrame(update);
-    };
-
-    // Staggered Animation para itens do grid
+    /* ========================================================
+       INTERSECTION OBSERVER
+       ======================================================== */
     const animateChildren = (parent) => {
       const children = parent.querySelectorAll('.stack-card, .cert, .project');
       children.forEach((child, index) => {
-        setTimeout(() => {
-          child.classList.add('animate');
-        }, index * 100);
+        setTimeout(() => child.classList.add('animate'), index * 100);
       });
     };
 
-    // Intersection Observer Master
-    const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -100px 0px" };
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          
           if (entry.target.querySelector('.stack-grid, .certs-grid, .projects-list')) {
-            setTimeout(() => animateChildren(entry.target), 200);
-          }
-
-          // Trigger Counter
-          if (entry.target.id === 'certificacoes' && !counterAnimated) {
-            const certCount = document.querySelectorAll('.cert').length;
-            const el1 = document.getElementById('cert-count');
-            const el2 = document.getElementById('cert-count-num');
-            if (el1) animateCounter(el1, certCount);
-            if (el2) animateCounter(el2, certCount);
-            counterAnimated = true;
+            setTimeout(() => animateChildren(entry.target), 150);
           }
           observer.unobserve(entry.target);
         }
       });
-    }, revealOptions);
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-    document.querySelectorAll('.reveal').forEach(section => {
-      revealObserver.observe(section);
-    });
+    document.querySelectorAll('.reveal').forEach(section => revealObserver.observe(section));
 
-    // Textos das certificações
+    /* ========================================================
+       CERTIFICATION DYNAMIC LOADER
+       ======================================================== */
     const certSummaries = {
-      'technical-support-fundamentals': 'Fundamentos de suporte técnico: diagnóstico, comunicação, chamados e help desk.',
-      'bits-bytes-networking': 'Redes básicas: OSI, TCP/IP, DNS, DHCP, roteamento e troubleshooting.',
-      'cybersecurity-intro': 'Cibersegurança: ameaças, senhas, phishing, criptografia e políticas.',
-      'azure-ai-900': 'IA Azure: ML, visão computacional, NLP e ética em IA.',
-      'office-365': 'Microsoft 365: Word, Excel, Teams, OneDrive e Copilot.',
-      'hardware-software': 'Hardware: CPU, RAM, HD, montagem PCs e SO.',
-      'lgpd': 'LGPD: direitos, obrigações, penalidades e privacidade.',
-      'gemini-enterprise': 'Gemini Enterprise: IA corporativa e Google Workspace.',
-      'hubspot-ai': 'Marketing IA: HubSpot CRM, workflows e análise preditiva.',
-      'coca-cola-coletivo': 'Soft skills: comunicação, equipe, problemas e networking.'
+      'technical-support-fundamentals': 'Troubleshooting, ticketing, customer service and IT support basics.',
+      'bits-bytes-networking': 'OSI model, TCP/IP, DNS, DHCP, and LAN/WAN troubleshooting.',
+      'cybersecurity-intro': 'Global threats, cryptography, password policies, and social engineering defense.',
+      'azure-ai-900': 'Machine Learning, Computer Vision, NLP, and ethical AI using Azure.',
+      'office-365': 'Word, Excel, Teams, Outlook, and OneDrive for collaboration and support.',
+      'hardware-software': 'PC structure (CPU, RAM), peripherals, assembly, and OS installation.',
+      'lgpd': 'Compliance with General Data Protection Law, privacy, and user rights.',
+      'gemini-enterprise': 'Introduction to generative AI in corporate environments and Google Workspace.',
+      'hubspot-ai': 'Using AI and HubSpot for workflow automation and marketing data analysis.',
+      'coca-cola-coletivo': 'Soft skills development for the modern job market.'
     };
 
-    // Carregar textos dos Certificados
+    // Override for Portuguese
+    certSummaries['technical-support-fundamentals_pt'] = 'Diagnóstico de problemas, registro de chamados, soft skills para Help Desk e estrutura base de suporte de TI.';
+    certSummaries['bits-bytes-networking_pt'] = 'Aprofundamento em modelo OSI, protocolos TCP/IP, DNS, DHCP, ferramentas de rede e troubleshooting LAN/WAN.';
+    certSummaries['cybersecurity-intro_pt'] = 'Ameaças globais, criptografia básica, boas práticas de senhas corporativas e defesa contra engenharia social/phishing.';
+    certSummaries['azure-ai-900_pt'] = 'Princípios de Machine Learning, Visão Computacional, NLP e desenvolvimento ético utilizando o ecossistema Azure.';
+    certSummaries['office-365_pt'] = 'Domínio corporativo das ferramentas Word, Excel, Teams, Outlook e OneDrive para colaboração e suporte de primeiro nível.';
+    certSummaries['hardware-software_pt'] = 'Estrutura física de PCs (CPU, RAM, Placas-mãe), periféricos, processos de montagem e instalação de Sistemas Operacionais.';
+    certSummaries['lgpd_pt'] = 'Conformidade com a Lei Geral de Proteção de Dados, privacidade e direitos do usuário.';
+    certSummaries['gemini-enterprise_pt'] = 'Introdução ao uso de IA generativa em ambientes corporativos e Google Workspace.';
+    certSummaries['hubspot-ai_pt'] = 'Uso de IA e HubSpot para automação de fluxos e análise de dados de marketing.';
+    certSummaries['coca-cola-coletivo_pt'] = 'Desenvolvimento de soft skills para o mercado de trabalho moderno.';
+
     const loadCertDescriptions = () => {
       document.querySelectorAll('.cert').forEach((cert, index) => {
         const key = cert.dataset.cert;
         const desc = cert.querySelector('.cert-description');
+        const langKey = currentLang === 'pt' ? `${key}_pt` : key;
+        
         setTimeout(() => {
-          if (certSummaries[key]) {
-            desc.textContent = certSummaries[key];
+          if (certSummaries[langKey]) {
+            desc.textContent = certSummaries[langKey];
             desc.classList.remove('cert-loading');
           }
         }, 300 + (index * 100));
@@ -1420,39 +1055,13 @@
         }
       });
     });
-    certObserver.observe(document.getElementById('certificacoes'));
+    certObserver.observe(document.getElementById('certs'));
 
-
-    // EFEITO "HACKER" SCRAMBLE NOS TÍTULOS (Micro-interação UI/UX)
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-    
-    document.querySelectorAll('.scramble-target').forEach(el => {
-      el.addEventListener('mouseenter', event => {
-        const target = el.querySelector('.stack-card-title, .project-num, .cert-issuer, .contact-label');
-        if(!target || target.dataset.scrambling === "true") return;
-        
-        target.dataset.scrambling = "true";
-        let iterations = 0;
-        const originalText = target.dataset.value || target.innerText;
-        if(!target.dataset.value) target.dataset.value = originalText; // Salva o texto original
-
-        const interval = setInterval(() => {
-          target.innerText = originalText.split("")
-            .map((letter, index) => {
-              if(index < iterations || letter === " ") return originalText[index];
-              return letters[Math.floor(Math.random() * letters.length)]
-            }).join("");
-          
-          if(iterations >= originalText.length) {
-            clearInterval(interval);
-            target.dataset.scrambling = "false";
-          }
-          iterations += 1 / 3;
-        }, 30);
-      });
+    // Re-trigger cert description on lang change
+    langBtn.addEventListener('click', () => {
+        setTimeout(loadCertDescriptions, 100);
     });
 
   </script>
-
 </body>
 </html>
