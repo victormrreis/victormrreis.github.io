@@ -462,16 +462,42 @@
     }
 
     .cert {
-      padding: 1.5rem;
+      padding: 1.8rem;
       background: var(--bg-alt);
       border: 1px solid var(--line);
-      border-left: 2px solid var(--accent-dim);
-      transition: border-left-color 0.2s, transform 0.2s;
+      border-left: 3px solid var(--accent-dim);
+      border-radius: 4px;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
     }
 
     .cert:hover {
+      transform: translateY(-8px) scale(1.02);
       border-left-color: var(--accent);
-      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(159, 255, 177, 0.2);
+      background: rgba(23, 23, 26, 0.9);
+    }
+
+    .cert-description {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--line);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      font-family: var(--mono);
+    }
+
+    .cert:hover .cert-description {
+      opacity: 1;
+      max-height: 100px;
+      margin-top: 1rem;
     }
 
     .cert-issuer {
@@ -479,16 +505,36 @@
       font-size: 0.7rem;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.4rem;
     }
 
     .cert-name {
       font-size: 1rem;
       color: var(--text);
       font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 0.75rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      font-family: var(--sans);
+    }
+
+    .cert-loading {
+      font-size: 0.7rem;
+      color: var(--accent-dim);
+      font-family: var(--mono);
+      font-style: italic;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .cert-description.typing {
+      border-right: 2px solid var(--accent);
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 2s steps(40) forwards;
     }
 
     .cert-year {
@@ -1166,64 +1212,74 @@
 
       <div class="certs-grid">
 
-        <div class="cert">
+        <div class="cert" data-cert="technical-support-fundamentals">
           <div class="cert-issuer">Google</div>
           <div class="cert-name">Technical Support Fundamentals</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="bits-bytes-networking">
           <div class="cert-issuer">Google</div>
           <div class="cert-name">The Bits and Bytes of Computer Networking</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="cybersecurity-intro">
           <div class="cert-issuer">Cisco</div>
           <div class="cert-name">Introduction to Cybersecurity</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="azure-ai-900">
           <div class="cert-issuer">Microsoft</div>
           <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="office-365">
           <div class="cert-issuer">Fundação Bradesco</div>
           <div class="cert-name">Microsoft Office 365</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="hardware-software">
           <div class="cert-issuer">Fundação Bradesco</div>
           <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
           <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="lgpd">
           <div class="cert-issuer">Fundação Bradesco</div>
           <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="gemini-enterprise">
           <div class="cert-issuer">Google Cloud</div>
           <div class="cert-name">Introdução ao Gemini Enterprise</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="hubspot-ai">
           <div class="cert-issuer">Coursera</div>
           <div class="cert-name">Marketing Automation with AI and HubSpot</div>
           <div class="cert-year">2026</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
-        <div class="cert">
+        <div class="cert" data-cert="coca-cola-coletivo">
           <div class="cert-issuer">Instituto Coca-Cola Brasil</div>
           <div class="cert-name">Coletivo Online - Preparação para o Mercado de Trabalho</div>
           <div class="cert-year">Novembro 2025 (11h)</div>
+          <div class="cert-description cert-loading">Carregando...</div>
         </div>
 
       </div>
@@ -1374,6 +1430,44 @@
     window.addEventListener('load', () => {
       reveal();
     });
+
+    const certSummaries = {
+      'technical-support-fundamentals': 'Fundamentos de suporte técnico: diagnóstico, comunicação, chamados e help desk.',
+      'bits-bytes-networking': 'Redes básicas: OSI, TCP/IP, DNS, DHCP, roteamento e troubleshooting.',
+      'cybersecurity-intro': 'Cibersegurança: ameaças, senhas, phishing, criptografia e políticas.',
+      'azure-ai-900': 'IA Azure: ML, visão computacional, NLP e ética em IA.',
+      'office-365': 'Microsoft 365: Word, Excel, Teams, OneDrive e Copilot.',
+      'hardware-software': 'Hardware: CPU, RAM, HD, montagem PCs e SO.',
+      'lgpd': 'LGPD: direitos, obrigações, penalidades e privacidade.',
+      'gemini-enterprise': 'Gemini Enterprise: IA corporativa e Google Workspace.',
+      'hubspot-ai': 'Marketing IA: HubSpot CRM, workflows e análise preditiva.',
+      'coca-cola-coletivo': 'Soft skills: comunicação, equipe, problemas e networking.'
+    };
+
+    const loadCertDescriptions = () => {
+      document.querySelectorAll('.cert').forEach((cert, index) => {
+        const key = cert.dataset.cert;
+        const desc = cert.querySelector('.cert-description');
+        setTimeout(() => {
+          if (certSummaries[key]) {
+            desc.textContent = certSummaries[key];
+            desc.classList.add('typing');
+            desc.classList.remove('cert-loading');
+          }
+        }, 500 + (index * 150));
+      });
+    };
+
+    // Observer para carregar quando visível
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadCertDescriptions();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    observer.observe(document.getElementById('certificacoes'));
   </script>
 
 </body>
