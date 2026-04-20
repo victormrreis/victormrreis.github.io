@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
@@ -8,8 +7,6 @@
   <title>victor.martins — Suporte Técnico em formação</title>
   <meta name="description"
     content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico N1 / Help Desk. Certificações Google, Cisco e Microsoft. Inglês avançado.">
-
-  <!-- Fonts -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,9 +22,9 @@
       --text: #e8e8ea;
       --text-dim: #8a8a93;
       --text-muted: #5a5a62;
-      --accent: #9fffb1;
-      /* verde-terminal */
+      --accent: #9fffb1; /* verde-terminal */
       --accent-dim: #5fc774;
+      --accent-glow: rgba(159, 255, 177, 0.15);
       --serif: "Fraunces", Georgia, serif;
       --sans: "IBM Plex Sans", -apple-system, sans-serif;
       --mono: "JetBrains Mono", "Courier New", monospace;
@@ -82,7 +79,14 @@
       padding: 1.25rem 0;
       background: rgba(14, 14, 16, 0.8);
       backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-bottom 0.3s ease, padding 0.3s ease;
+    }
+
+    nav.scrolled {
+      padding: 1rem 0;
       border-bottom: 1px solid var(--line);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
     nav .container {
@@ -115,12 +119,13 @@
       font-size: 0.78rem;
       color: var(--text-dim);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: all 0.3s ease;
       text-transform: lowercase;
     }
 
     nav a:hover {
       color: var(--accent);
+      text-shadow: 0 0 8px var(--accent-glow);
     }
 
     /* ============ HERO ============ */
@@ -164,12 +169,23 @@
       margin-bottom: 2rem;
       color: var(--text);
       animation: fadeUp 0.8s 0.2s both;
+      position: relative;
     }
 
     h1 .italic {
       font-style: italic;
       color: var(--accent);
       font-weight: 300;
+    }
+
+    /* Blinking Cursor na Tipografia */
+    h1::after {
+      content: '_';
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+      font-family: var(--mono);
+      font-weight: 300;
+      font-style: normal;
     }
 
     .hero-sub {
@@ -220,6 +236,7 @@
       border-radius: 50%;
       margin-right: 0.5rem;
       animation: pulse 2s infinite;
+      box-shadow: 0 0 8px var(--accent);
     }
 
     /* ============ SECTIONS ============ */
@@ -290,7 +307,12 @@
       padding: 2rem;
       background: var(--bg-alt);
       border: 1px solid var(--line);
-      border-radius: 2px;
+      border-radius: 4px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-stats:hover {
+      box-shadow: 0 10px 30px var(--accent-glow);
     }
 
     .stat {
@@ -314,6 +336,12 @@
       line-height: 1;
       color: var(--accent);
       letter-spacing: -0.02em;
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover .stat-number {
+      transform: scale(1.05) translateX(10px);
+      text-shadow: 0 0 15px var(--accent-glow);
     }
 
     .stat-label {
@@ -335,11 +363,17 @@
     .stack-card {
       background: var(--bg);
       padding: 2.5rem 2rem;
-      transition: background 0.3s ease;
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 1;
     }
 
     .stack-card:hover {
       background: var(--bg-alt);
+      transform: translateY(-5px);
+      z-index: 2;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow);
+      border-radius: 4px;
     }
 
     .stack-card-title {
@@ -362,6 +396,11 @@
       border-bottom: 1px dashed var(--line);
       display: flex;
       align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .stack-card li:hover {
+      color: #fff;
     }
 
     .stack-card li:last-child {
@@ -388,7 +427,7 @@
       padding: 2.5rem 0;
       border-top: 1px solid var(--line);
       align-items: baseline;
-      transition: padding-left 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       cursor: default;
     }
 
@@ -397,18 +436,24 @@
     }
 
     .project:hover {
-      padding-left: 1rem;
+      padding-left: 1.5rem;
+      background: linear-gradient(90deg, rgba(23,23,26,0.8) 0%, transparent 100%);
     }
 
     .project:hover .project-arrow {
       color: var(--accent);
-      transform: translateX(4px);
+      transform: translateX(8px);
     }
 
     .project-num {
       font-family: var(--mono);
       font-size: 0.85rem;
       color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    
+    .project:hover .project-num {
+      color: var(--accent);
     }
 
     .project-name {
@@ -445,6 +490,12 @@
       padding: 0.2rem 0.5rem;
       border: 1px solid var(--line);
       border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .project:hover .project-tag {
+      border-color: var(--text-muted);
+      color: var(--text);
     }
 
     .project-arrow {
@@ -467,7 +518,7 @@
       border: 1px solid var(--line);
       border-left: 3px solid var(--accent-dim);
       border-radius: 4px;
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       cursor: pointer;
       overflow: hidden;
       position: relative;
@@ -476,28 +527,29 @@
     .cert:hover {
       transform: translateY(-8px) scale(1.02);
       border-left-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(159, 255, 177, 0.2);
-      background: rgba(23, 23, 26, 0.9);
+      box-shadow: 0 20px 40px var(--accent-glow);
+      background: rgba(23, 23, 26, 0.95);
     }
 
     .cert-description {
       font-size: 0.8rem;
       color: var(--text-dim);
-      line-height: 1.4;
-      margin-top: 0.75rem;
-      padding-top: 0.75rem;
+      line-height: 1.5;
+      margin-top: 0;
+      padding-top: 0;
       border-top: 1px dashed var(--line);
       opacity: 0;
       max-height: 0;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       font-family: var(--mono);
     }
 
     .cert:hover .cert-description {
       opacity: 1;
-      max-height: 100px;
+      max-height: 150px; /* Suficiente para texto multilinha */
       margin-top: 1rem;
+      padding-top: 1rem;
     }
 
     .cert-issuer {
@@ -525,27 +577,18 @@
       font-style: italic;
     }
 
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-
-      to {
-        width: 100%;
-      }
-    }
-
-    .cert-description.typing {
-      border-right: 2px solid var(--accent);
-      overflow: hidden;
-      white-space: nowrap;
-      animation: typing 2s steps(40) forwards;
-    }
-
     .cert-year {
       font-family: var(--mono);
       font-size: 0.75rem;
       color: var(--text-muted);
+    }
+
+    /* Cursor para o JS Typewriter */
+    .typing-cursor::after {
+      content: '▋';
+      animation: blink 1s step-start infinite;
+      color: var(--accent);
+      margin-left: 2px;
     }
 
     /* ============ CONTACT ============ */
@@ -583,7 +626,7 @@
       align-items: center;
       text-decoration: none;
       color: var(--text);
-      transition: padding-left 0.25s, color 0.25s;
+      transition: all 0.3s ease;
     }
 
     .contact-item:last-child {
@@ -591,8 +634,9 @@
     }
 
     .contact-item:hover {
-      padding-left: 1rem;
+      padding-left: 1.5rem;
       color: var(--accent);
+      background: linear-gradient(90deg, rgba(23,23,26,0.8) 0%, transparent 100%);
     }
 
     .contact-label {
@@ -611,11 +655,11 @@
 
     .contact-arrow {
       font-family: var(--mono);
-      transition: transform 0.25s;
+      transition: transform 0.3s;
     }
 
     .contact-item:hover .contact-arrow {
-      transform: translateX(6px);
+      transform: translateX(10px);
     }
 
     /* ============ FOOTER ============ */
@@ -639,7 +683,6 @@
         opacity: 0;
         transform: translateY(30px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -647,20 +690,21 @@
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
+      0%, 100% {
         opacity: 1;
         transform: scale(1);
       }
-
       50% {
         opacity: 0.6;
         transform: scale(0.9);
       }
     }
 
-    /* Reveal on scroll (progressive enhancement — content is visible by default) */
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Reveal on scroll */
     .js-enabled .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -672,217 +716,7 @@
       transform: translateY(0);
     }
 
-    /* ============ RESPONSIVE ============ */
-    @media (max-width: 900px) {
-      .container {
-        padding: 0 1.5rem;
-      }
-
-      /* Nav compacta — só logo visível no mobile */
-      nav ul {
-        display: none;
-      }
-
-      section {
-        padding: 5rem 0;
-      }
-
-      .hero {
-        padding-top: 5rem;
-        padding-bottom: 3rem;
-        min-height: auto;
-      }
-
-      .hero-tag {
-        font-size: 0.7rem;
-        margin-bottom: 1.5rem;
-        line-height: 1.5;
-      }
-
-      .hero-sub {
-        font-size: 1.05rem;
-        margin-bottom: 2rem;
-      }
-
-      .hero-meta {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.25rem;
-        padding-top: 1.5rem;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-
-      .about-text p {
-        font-size: 1rem;
-      }
-
-      .stat-number {
-        font-size: 2.75rem;
-      }
-
-      .stack-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stack-card {
-        padding: 2rem 1.5rem;
-      }
-
-      .project {
-        grid-template-columns: auto 1fr;
-        gap: 0.5rem 1rem;
-        padding: 2rem 0;
-      }
-
-      .project-num {
-        grid-row: 1;
-        grid-column: 1;
-      }
-
-      .project-name {
-        grid-row: 1;
-        grid-column: 2;
-        font-size: 1.2rem;
-      }
-
-      .project-desc {
-        grid-row: 2;
-        grid-column: 1 / -1;
-        font-size: 0.9rem;
-      }
-
-      .project-arrow {
-        display: none;
-      }
-
-      .project-tags {
-        margin-top: 0.5rem;
-      }
-
-      .project:hover {
-        padding-left: 0;
-      }
-
-      .certs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-item {
-        grid-template-columns: 1fr;
-        gap: 0.3rem;
-        padding: 1.25rem 0;
-      }
-
-      .contact-label {
-        font-size: 0.7rem;
-      }
-
-      .contact-value {
-        font-size: 1.05rem;
-        word-break: break-all;
-      }
-
-      .contact-arrow {
-        display: none;
-      }
-
-      .contact-item:hover {
-        padding-left: 0;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-      }
-
-      footer .container {
-        flex-direction: column !important;
-        gap: 0.5rem;
-      }
-    }
-
-    /* Telas muito pequenas — iPhone SE, Android compactos */
-    @media (max-width: 420px) {
-      .container {
-        padding: 0 1.25rem;
-      }
-
-      h1 {
-        font-size: 3.5rem;
-      }
-
-      .hero-sub {
-        font-size: 1rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-        margin-bottom: 2.5rem;
-      }
-
-      .contact-title {
-        font-size: 2.25rem;
-      }
-
-      .hero-meta {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-    }
-
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes fadeSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Page transitions entre seções */
-    section {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Animações staggered para cards */
+    /* Staggered Animations */
     .stack-card,
     .cert,
     .project {
@@ -898,37 +732,7 @@
       transform: translateY(0);
     }
 
-    /* Hover animations mais ricas */
-    .cert:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(159, 255, 177, 0.15);
-    }
-
-    .stack-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(159, 255, 177, 0.1);
-    }
-
-    .project:hover {
-      transform: translateX(8px);
-    }
-
-    /* Nav links com glow */
-    nav a:hover {
-      color: var(--accent);
-      text-shadow: 0 0 10px var(--accent);
-    }
-
-    /* Pulse suave nos stats */
-    .stat-number {
-      transition: all 0.3s ease;
-    }
-
-    .stat:hover .stat-number {
-      transform: scale(1.05);
-    }
-
-    /* Lines que aparecem gradualmente */
+    /* Horizontal Line Growth */
     section::before {
       content: '';
       position: absolute;
@@ -938,11 +742,39 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
       transform: scaleX(0);
-      transition: transform 0.8s ease-out;
+      transition: transform 1s ease-out;
     }
 
     section.visible::before {
       transform: scaleX(1);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .container { padding: 0 1.5rem; }
+      nav ul { display: none; }
+      section { padding: 5rem 0; }
+      .hero { padding-top: 5rem; padding-bottom: 3rem; min-height: auto; }
+      .hero-meta { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .project { grid-template-columns: auto 1fr; gap: 0.5rem 1rem; padding: 2rem 0; }
+      .project-num { grid-row: 1; grid-column: 1; }
+      .project-name { grid-row: 1; grid-column: 2; font-size: 1.2rem; }
+      .project-desc { grid-row: 2; grid-column: 1 / -1; font-size: 0.9rem; }
+      .project-arrow { display: none; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .contact-item { grid-template-columns: 1fr; gap: 0.3rem; padding: 1.25rem 0; }
+      .contact-arrow { display: none; }
+      footer { flex-direction: column; text-align: center; }
+      footer .container { flex-direction: column !important; gap: 0.5rem; }
+    }
+
+    @media (max-width: 420px) {
+      .container { padding: 0 1.25rem; }
+      h1 { font-size: 3.5rem; }
+      .hero-meta { grid-template-columns: 1fr; }
+      .contact-title { font-size: 2.25rem; }
     }
   </style>
 
@@ -959,27 +791,25 @@
       }
     </style>
     <div style="background: #ffefc1; color: #222; padding: 1.5rem; text-align: center; font-family: sans-serif;">
-      Este site funciona melhor com JavaScript habilitado. Algumas animações e contadores podem não aparecer
-      corretamente.
+      Este site funciona melhor com JavaScript habilitado. Algumas animações e contadores podem não aparecer corretamente.
     </div>
   </noscript>
 </head>
 
 <body>
 
-  <nav>
+  <nav id="navbar">
     <div class="container">
       <div class="logo">victor.martins</div>
       <ul>
         <li><a href="#sobre">sobre</a></li>
         <li><a href="#stack">stack</a></li>
         <li><a href="#projetos">projetos</a></li>
+        <li><a href="#certificacoes">certificações</a></li>
         <li><a href="#contato">contato</a></li>
       </ul>
     </div>
   </nav>
-
-  <!-- ============ HERO ============ -->
 
   <header class="hero">
     <div class="container">
@@ -1015,11 +845,8 @@
           </div>
         </div>
       </div>
-
     </div>
   </header>
-
-  <!-- ============ SOBRE ============ -->
 
   <section id="sobre" class="reveal">
     <div class="container">
@@ -1051,7 +878,7 @@
 
         <aside class="about-stats">
           <div class="stat">
-            <span class="stat-number" id="cert-count-num"></span>
+            <span class="stat-number" id="cert-count-num">0</span>
             <span class="stat-label">certificações em TI, IA, redes e cibersegurança</span>
           </div>
           <div class="stat">
@@ -1064,11 +891,8 @@
           </div>
         </aside>
       </div>
-
     </div>
   </section>
-
-  <!-- ============ STACK ============ -->
 
   <section id="stack" class="reveal">
     <div class="container">
@@ -1120,11 +944,8 @@
           </ul>
         </div>
       </div>
-
     </div>
   </section>
-
-  <!-- ============ PROJETOS ============ -->
 
   <section id="projetos" class="reveal">
     <div class="container">
@@ -1134,7 +955,6 @@
       </h2>
 
       <div class="projects-list">
-
         <div class="project">
           <span class="project-num">01</span>
           <div>
@@ -1220,99 +1040,90 @@
           </div>
           <span class="project-arrow">→</span>
         </div>
-
       </div>
-
     </div>
   </section>
-
-  <!-- ============ CERTIFICAÇÕES ============ -->
 
   <section id="certificacoes" class="reveal">
     <div class="container">
       <div class="section-label">04 / Certificações</div>
       <h2 class="section-title">
-        <span id="cert-count"></span> certificados. A base <em>que importa</em> primeiro.
+        <span id="cert-count">0</span> certificados. A base <em>que importa</em> primeiro.
       </h2>
 
-      <div class="cert" data-cert="technical-support-fundamentals">
-        <div class="cert-issuer">Google</div>
-        <div class="cert-name">Technical Support Fundamentals</div>
-        <div class="cert-year">2024</div>
-        <div class="cert-description cert-loading">Carregando...</div>
+      <div class="certs-grid">
+        <div class="cert" data-cert="technical-support-fundamentals">
+          <div class="cert-issuer">Google</div>
+          <div class="cert-name">Technical Support Fundamentals</div>
+          <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="bits-bytes-networking">
+          <div class="cert-issuer">Google</div>
+          <div class="cert-name">The Bits and Bytes of Computer Networking</div>
+          <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="cybersecurity-intro">
+          <div class="cert-issuer">Cisco</div>
+          <div class="cert-name">Introduction to Cybersecurity</div>
+          <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="azure-ai-900">
+          <div class="cert-issuer">Microsoft</div>
+          <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
+          <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="office-365">
+          <div class="cert-issuer">Fundação Bradesco</div>
+          <div class="cert-name">Microsoft Office 365</div>
+          <div class="cert-year">2023</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="hardware-software">
+          <div class="cert-issuer">Fundação Bradesco</div>
+          <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
+          <div class="cert-year">2023</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="lgpd">
+          <div class="cert-issuer">Fundação Bradesco</div>
+          <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
+          <div class="cert-year">2023</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="gemini-enterprise">
+          <div class="cert-issuer">Google Cloud</div>
+          <div class="cert-name">Introdução ao Gemini Enterprise</div>
+          <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="hubspot-ai">
+          <div class="cert-issuer">Coursera</div>
+          <div class="cert-name">Marketing Automation with AI and HubSpot</div>
+          <div class="cert-year">2024</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
+
+        <div class="cert" data-cert="coca-cola-coletivo">
+          <div class="cert-issuer">Instituto Coca-Cola Brasil</div>
+          <div class="cert-name">Coletivo Online - Preparação Mercado</div>
+          <div class="cert-year">2023</div>
+          <div class="cert-description cert-loading">Carregando_</div>
+        </div>
       </div>
-
-      <div class="cert" data-cert="bits-bytes-networking">
-        <div class="cert-issuer">Google</div>
-        <div class="cert-name">The Bits and Bytes of Computer Networking</div>
-        <div class="cert-year">2024</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="cybersecurity-intro">
-        <div class="cert-issuer">Cisco</div>
-        <div class="cert-name">Introduction to Cybersecurity</div>
-        <div class="cert-year">2024</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="azure-ai-900">
-        <div class="cert-issuer">Microsoft</div>
-        <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
-        <div class="cert-year">2024</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="office-365">
-        <div class="cert-issuer">Fundação Bradesco</div>
-        <div class="cert-name">Microsoft Office 365</div>
-        <div class="cert-year">2023</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="hardware-software">
-        <div class="cert-issuer">Fundação Bradesco</div>
-        <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
-        <div class="cert-year">2023</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="lgpd">
-        <div class="cert-issuer">Fundação Bradesco</div>
-        <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
-        <div class="cert-year">2023</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="gemini-enterprise">
-        <div class="cert-issuer">Google Cloud</div>
-        <div class="cert-name">Introdução ao Gemini Enterprise</div>
-        <div class="cert-year">2024</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="hubspot-ai">
-        <div class="cert-issuer">Coursera</div>
-        <div class="cert-name">Marketing Automation with AI and HubSpot</div>
-        <div class="cert-year">2024</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-
-      <div class="cert" data-cert="coca-cola-coletivo">
-        <div class="cert-issuer">Instituto Coca-Cola Brasil</div>
-        <div class="cert-name">Coletivo Online - Preparação para o Mercado de Trabalho</div>
-        <div class="cert-year">Novembro 2023 (11h)</div>
-        <div class="cert-description cert-loading">Carregando...</div>
-      </div>
-      <div class="cert-description cert-loading">Carregando...</div>
-    </div>
-
-    </div>
-
     </div>
   </section>
-
-  <!-- ============ CONTATO ============ -->
 
   <section id="contato" class="contact reveal">
     <div class="container">
@@ -1322,7 +1133,6 @@
       </h2>
 
       <div class="contact-list">
-
         <a href="mailto:byvictormartinsreis@gmail.com" class="contact-item">
           <span class="contact-label">Email</span>
           <span class="contact-value">byvictormartinsreis@gmail.com</span>
@@ -1347,9 +1157,7 @@
           <span class="contact-value">+55 (21) 97358-1707</span>
           <span class="contact-arrow">→</span>
         </a>
-
       </div>
-
     </div>
   </section>
 
@@ -1361,35 +1169,58 @@
   </footer>
 
   <script>
-    const easeOut = t => 1 - Math.pow(1 - t, 3);
-
     document.documentElement.classList.add('js-enabled');
+
+    // Dicionário de certificações agora estruturado corretamente
+    const certSummaries = {
+      'technical-support-fundamentals': 'Fundamentos de redes, sistemas operacionais, hardware e atendimento direto ao usuário.',
+      'bits-bytes-networking': 'Aprofundamento em protocolos TCP/IP, DNS, DHCP, IPv4/IPv6 e camadas do modelo OSI.',
+      'cybersecurity-intro': 'Conceitos base sobre ameaças, vulnerabilidades, criptografia e segurança em redes corporativas.',
+      'azure-ai-900': 'Conceitos fundamentais de Inteligência Artificial, Machine Learning, Visão Computacional e NLP na nuvem Azure.',
+      'office-365': 'Administração e uso eficiente do ecossistema Microsoft: Word, Excel, Teams e OneDrive.',
+      'hardware-software': 'Reconhecimento de componentes de PC, montagem, formatação e rotinas de manutenção preventiva.',
+      'lgpd': 'Diretrizes, princípios e aplicações práticas da Lei Geral de Proteção de Dados no ambiente de TI.',
+      'gemini-enterprise': 'Uso avançado de modelos de linguagem (LLMs) e integração no Google Workspace.',
+      'hubspot-ai': 'Marketing com IA: HubSpot CRM, automação de fluxos de trabalho e análise preditiva de dados.',
+      'coca-cola-coletivo': 'Desenvolvimento de soft skills: comunicação interpessoal, trabalho em equipe e resolução de problemas.'
+    };
+
+    // Função Easing para os contadores numéricos
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
 
     let counterAnimated = false;
     let ticking = false;
 
-    const animateCounter = (el, target, duration = 1200) => {
-      let startTime = null;
+    // Nav Background on Scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
 
+    // Animação de Contador de Números
+    const animateCounter = (el, target, duration = 1500) => {
+      let startTime = null;
       const update = (timestamp) => {
         if (!startTime) startTime = timestamp;
-
         const progress = Math.min((timestamp - startTime) / duration, 1);
         const eased = easeOut(progress);
-
         const value = Math.floor(eased * target);
+        
         el.textContent = value;
-
         if (progress < 1) {
           requestAnimationFrame(update);
         } else {
           el.textContent = target;
         }
       };
-
       requestAnimationFrame(update);
     };
 
+    // Staggered Animation para elementos em grid/lista
     const animateChildren = (parent) => {
       const children = parent.querySelectorAll('.stack-card, .cert, .project');
       children.forEach((child, index) => {
@@ -1401,7 +1232,6 @@
 
     const runCounter = () => {
       if (counterAnimated) return;
-
       const section = document.getElementById('certificacoes');
       if (!section) return;
 
@@ -1415,29 +1245,40 @@
 
         if (el1) animateCounter(el1, certCount);
         if (el2) animateCounter(el2, certCount);
-
         counterAnimated = true;
       }
     };
 
+    // Efeito de Máquina de Escrever em JS robusto
+    const typeWriterEffect = (element, text, speed = 20) => {
+      element.textContent = '';
+      element.classList.add('typing-cursor');
+      let i = 0;
+      
+      const type = () => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          element.classList.remove('typing-cursor');
+        }
+      };
+      type();
+    };
+
+    // Revela elementos no scroll
     const reveal = () => {
-      document.querySelectorAll('section').forEach((section, index) => {
+      document.querySelectorAll('section').forEach((section) => {
         const rect = section.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.85) {
           section.classList.add('visible');
-
-          // Animação staggered dos filhos
+          
           if (section.querySelector('.stack-grid, .certs-grid, .projects-list')) {
             setTimeout(() => animateChildren(section), 200);
           }
-
-          // Reveal original para .reveal
-          if (section.classList.contains('reveal')) {
-            section.classList.add('visible');
-          }
         }
       });
-
       runCounter();
     };
 
@@ -1451,53 +1292,33 @@
       }
     };
 
-    window.addEventListener('scroll', onScrollHandler, { passive: true });
-    window.addEventListener('load', () => {
-      reveal();
-      document.querySelectorAll('.cert').forEach((cert, index) => {
-        const key = cert.dataset.cert;
-        const desc = cert.querySelector('.cert-description');
-        setTimeout(() => {
-          if (certSummaries[key] && desc) {
-            desc.textContent = certSummaries[key];
-            desc.classList.add('typing');
-            desc.classList.remove('cert-loading');
-          }
-        }, 500 + (index * 150));
-      });
-      'hubspot-ai'; 'Marketing IA: HubSpot CRM, workflows e análise preditiva.',
-        'coca-cola-coletivo'; 'Soft skills: comunicação, equipe, problemas e networking.'
-    })
-
-    const loadCertDescriptions = () => {
-      document.querySelectorAll('.cert').forEach((cert, index) => {
-        const key = cert.dataset.cert;
-        const desc = cert.querySelector('.cert-description');
-        setTimeout(() => {
-          if (certSummaries[key]) {
-            desc.textContent = certSummaries[key];
-            desc.classList.add('typing');
-            desc.classList.remove('cert-loading');
-          }
-        }, 500 + (index * 150));
-      });
-    };
-
-    // Observer para carregar quando visível
-    const observer = new IntersectionObserver((entries) => {
+    // Intersection Observer específico para acionar a digitação dos cards de certs
+    const certObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          loadCertDescriptions();
-          observer.unobserve(entry.target);
+          const cert = entry.target;
+          const key = cert.dataset.cert;
+          const desc = cert.querySelector('.cert-description');
+          
+          if (certSummaries[key] && desc.classList.contains('cert-loading')) {
+            desc.classList.remove('cert-loading');
+            typeWriterEffect(desc, certSummaries[key]);
+          }
+          certObserver.unobserve(cert); // Evita digitar de novo
         }
       });
+    }, { threshold: 0.1 });
+
+    window.addEventListener('scroll', onScrollHandler, { passive: true });
+    
+    window.addEventListener('load', () => {
+      reveal();
+      
+      // Observa os cards de certificações individuais
+      document.querySelectorAll('.cert').forEach(cert => {
+        certObserver.observe(cert);
+      });
     });
-    const certSection = document.getElementById('certificacoes');
-    if (certSection) {
-      observer.observe(certSection);
-    }
   </script>
-
 </body>
-
 </html>
