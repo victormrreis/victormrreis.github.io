@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +8,7 @@
 <meta name="description" content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico N1 / Help Desk. Certificações Google, Cisco e Microsoft. Inglês avançado.">
 
 <!-- Fonts -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -581,28 +583,69 @@
   }
 
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .container { padding: 0 1.5rem; }
 
-    nav ul { gap: 1rem; }
-    nav a { font-size: 0.7rem; }
+    /* Nav compacta — só logo visível no mobile */
+    nav ul { display: none; }
 
     section { padding: 5rem 0; }
 
+    .hero {
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+      min-height: auto;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-meta {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding-top: 1.5rem;
+    }
+
     .about-grid {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2.5rem;
     }
+
+    .about-text p { font-size: 1rem; }
+
+    .stat-number { font-size: 2.75rem; }
+
+    .stack-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stack-card { padding: 2rem 1.5rem; }
 
     .project {
       grid-template-columns: auto 1fr;
       gap: 0.5rem 1rem;
+      padding: 2rem 0;
     }
 
     .project-num { grid-row: 1; grid-column: 1; }
-    .project-name { grid-row: 1; grid-column: 2; font-size: 1.25rem; }
-    .project-desc { grid-row: 2; grid-column: 1 / -1; }
+    .project-name { grid-row: 1; grid-column: 2; font-size: 1.2rem; }
+    .project-desc { grid-row: 2; grid-column: 1 / -1; font-size: 0.9rem; }
     .project-arrow { display: none; }
+    .project-tags { margin-top: 0.5rem; }
+
+    .project:hover { padding-left: 0; }
+
+    .certs-grid {
+      grid-template-columns: 1fr;
+    }
 
     .contact-item {
       grid-template-columns: 1fr;
@@ -610,12 +653,32 @@
       padding: 1.25rem 0;
     }
 
-    .contact-value { font-size: 1.1rem; }
+    .contact-label { font-size: 0.7rem; }
+    .contact-value { font-size: 1.05rem; word-break: break-all; }
     .contact-arrow { display: none; }
 
-    footer { flex-direction: column; gap: 0.5rem; }
+    .contact-item:hover { padding-left: 0; }
+
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    footer .container { flex-direction: column !important; gap: 0.5rem; }
+  }
+
+  /* Telas muito pequenas — iPhone SE, Android compactos */
+  @media (max-width: 420px) {
+    .container { padding: 0 1.25rem; }
+
+    h1 { font-size: 3.5rem; }
+
+    .hero-sub { font-size: 1rem; }
+
+    .section-title { font-size: 2rem; margin-bottom: 2.5rem; }
+
+    .contact-title { font-size: 2.25rem; }
+
+    .hero-meta { grid-template-columns: 1fr; gap: 1rem; }
   }
 </style>
+
 </head>
 <body>
 
@@ -632,44 +695,49 @@
 </nav>
 
 <!-- ============ HERO ============ -->
+
 <header class="hero">
   <div class="container">
     <div class="hero-grid">
       <div class="hero-tag">disponível para vagas · nova iguaçu / rj</div>
 
-      <h1>
-        Victor<br>
-        <span class="italic">Martins</span>
-      </h1>
+```
+  <h1>
+    Victor<br>
+    <span class="italic">Martins</span>
+  </h1>
 
-      <p class="hero-sub">
-        Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk.
-        Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.
-      </p>
+  <p class="hero-sub">
+    Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk.
+    Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.
+  </p>
 
-      <div class="hero-meta">
-        <div class="meta-item">
-          <span class="meta-label">Status</span>
-          <span class="meta-value"><span class="dot"></span>Open to work</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Cargo-alvo</span>
-          <span class="meta-value">Suporte TI · Help Desk N1</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Localização</span>
-          <span class="meta-value">Rio de Janeiro · BR</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Idiomas</span>
-          <span class="meta-value">PT-BR · EN (C1)</span>
-        </div>
-      </div>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Status</span>
+      <span class="meta-value"><span class="dot"></span>Open to work</span>
     </div>
+    <div class="meta-item">
+      <span class="meta-label">Cargo-alvo</span>
+      <span class="meta-value">Suporte TI · Help Desk N1</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Localização</span>
+      <span class="meta-value">Rio de Janeiro · BR</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Idiomas</span>
+      <span class="meta-value">PT-BR · EN (C1)</span>
+    </div>
+  </div>
+</div>
+```
+
   </div>
 </header>
 
 <!-- ============ SOBRE ============ -->
+
 <section id="sobre" class="reveal">
   <div class="container">
     <div class="section-label">01 / Sobre</div>
@@ -677,46 +745,50 @@
       19 anos, três anos de técnica acumulados e <em>uma direção clara</em>.
     </h2>
 
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          Comecei cedo — aos 16 já estava terminando a formação completa de inglês na Wizard,
-          e aos 19 já entrego rotina administrativa em <strong>contrato Petrobras</strong>, em ambiente industrial
-          de alta criticidade na Usina Termelétrica de Seropédica.
-        </p>
-        <p>
-          Paralelamente, ataco a base técnica que falta: <strong>certificações Google em Technical Support
-          e Networking</strong>, Cisco em Cybersecurity, Microsoft em Office 365 e Azure AI Fundamentals.
-          Documento cada passo publicamente no LinkedIn, com <strong>estudos e projetos em Python</strong>
-          postados semanalmente.
-        </p>
-        <p>
-          Direciono a carreira para Suporte Técnico N1 / Help Desk como primeiro passo formal em TI.
-          Perfil orientado a <strong>registro de chamados, troubleshooting, atendimento ao usuário
-          e escalonamento estruturado</strong>. Com raiz em rotinas de documentação técnica que já
-          pratico no dia a dia.
-        </p>
-      </div>
+```
+<div class="about-grid">
+  <div class="about-text">
+    <p>
+      Comecei cedo — aos 16 já estava terminando a formação completa de inglês na Wizard,
+      e aos 19 já entrego rotina administrativa em <strong>contrato Petrobras</strong>, em ambiente industrial
+      de alta criticidade na Usina Termelétrica de Seropédica.
+    </p>
+    <p>
+      Paralelamente, ataco a base técnica que falta: <strong>certificações Google em Technical Support
+      e Networking</strong>, Cisco em Cybersecurity, Microsoft em Office 365 e Azure AI Fundamentals.
+      Documento cada passo publicamente no LinkedIn, com <strong>estudos e projetos em Python</strong>
+      postados semanalmente.
+    </p>
+    <p>
+      Direciono a carreira para Suporte Técnico N1 / Help Desk como primeiro passo formal em TI.
+      Perfil orientado a <strong>registro de chamados, troubleshooting, atendimento ao usuário
+      e escalonamento estruturado</strong>. Com raiz em rotinas de documentação técnica que já
+      pratico no dia a dia.
+    </p>
+  </div>
 
-      <aside class="about-stats">
-        <div class="stat">
-          <span class="stat-number">13</span>
-          <span class="stat-label">certificações em TI, IA, redes e cibersegurança</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">8</span>
-          <span class="stat-label">meses em contrato prestado à Petrobras</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">8</span>
-          <span class="stat-label">anos de formação contínua em inglês (Wizard, W12)</span>
-        </div>
-      </aside>
+  <aside class="about-stats">
+    <div class="stat">
+      <span class="stat-number">13</span>
+      <span class="stat-label">certificações em TI, IA, redes e cibersegurança</span>
     </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">meses em contrato prestado à Petrobras</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">anos de formação contínua em inglês (Wizard, W12)</span>
+    </div>
+  </aside>
+</div>
+```
+
   </div>
 </section>
 
 <!-- ============ STACK ============ -->
+
 <section id="stack" class="reveal">
   <div class="container">
     <div class="section-label">02 / Stack técnica</div>
@@ -724,53 +796,57 @@
       Ferramentas, sistemas e <em>conceitos</em> que domino ou tenho base sólida.
     </h2>
 
-    <div class="stack-grid">
-      <div class="stack-card">
-        <div class="stack-card-title">Suporte &amp; Sistemas</div>
-        <ul>
-          <li>Troubleshooting de hardware e software</li>
-          <li>Registro e acompanhamento de chamados</li>
-          <li>Atendimento ao usuário</li>
-          <li>Windows 10 / 11</li>
-          <li>Fundamentos de Hardware</li>
-        </ul>
-      </div>
+```
+<div class="stack-grid">
+  <div class="stack-card">
+    <div class="stack-card-title">Suporte &amp; Sistemas</div>
+    <ul>
+      <li>Troubleshooting de hardware e software</li>
+      <li>Registro e acompanhamento de chamados</li>
+      <li>Atendimento ao usuário</li>
+      <li>Windows 10 / 11</li>
+      <li>Fundamentos de Hardware</li>
+    </ul>
+  </div>
 
-      <div class="stack-card">
-        <div class="stack-card-title">Redes &amp; Segurança</div>
-        <ul>
-          <li>TCP/IP, DNS, DHCP</li>
-          <li>Modelo OSI</li>
-          <li>Fundamentos de Cibersegurança</li>
-          <li>LGPD</li>
-          <li>Boas práticas de senhas e phishing</li>
-        </ul>
-      </div>
+  <div class="stack-card">
+    <div class="stack-card-title">Redes &amp; Segurança</div>
+    <ul>
+      <li>TCP/IP, DNS, DHCP</li>
+      <li>Modelo OSI</li>
+      <li>Fundamentos de Cibersegurança</li>
+      <li>LGPD</li>
+      <li>Boas práticas de senhas e phishing</li>
+    </ul>
+  </div>
 
-      <div class="stack-card">
-        <div class="stack-card-title">Microsoft 365</div>
-        <ul>
-          <li>Word, Excel, PowerPoint</li>
-          <li>Outlook, OneDrive, Teams</li>
-          <li>Azure AI-900 Fundamentals</li>
-          <li>Copilot &amp; automação básica</li>
-        </ul>
-      </div>
+  <div class="stack-card">
+    <div class="stack-card-title">Microsoft 365</div>
+    <ul>
+      <li>Word, Excel, PowerPoint</li>
+      <li>Outlook, OneDrive, Teams</li>
+      <li>Azure AI-900 Fundamentals</li>
+      <li>Copilot &amp; automação básica</li>
+    </ul>
+  </div>
 
-      <div class="stack-card">
-        <div class="stack-card-title">Programação</div>
-        <ul>
-          <li>Python — controle de fluxo, POO</li>
-          <li>Manipulação de arquivos, try/except</li>
-          <li>Lógica de programação (Portugol)</li>
-          <li>Git / GitHub (em adoção)</li>
-        </ul>
-      </div>
-    </div>
+  <div class="stack-card">
+    <div class="stack-card-title">Programação</div>
+    <ul>
+      <li>Python — controle de fluxo, POO</li>
+      <li>Manipulação de arquivos, try/except</li>
+      <li>Lógica de programação (Portugol)</li>
+      <li>Git / GitHub (em adoção)</li>
+    </ul>
+  </div>
+</div>
+```
+
   </div>
 </section>
 
 <!-- ============ PROJETOS ============ -->
+
 <section id="projetos" class="reveal">
   <div class="container">
     <div class="section-label">03 / Projetos</div>
@@ -778,99 +854,103 @@
       Construído para <em>aprender</em>, publicado para <em>provar</em>.
     </h2>
 
-    <div class="projects-list">
+```
+<div class="projects-list">
 
-      <div class="project">
-        <span class="project-num">01</span>
-        <div>
-          <div class="project-name">Polimorfismo em <em>Python</em></div>
-          <div class="project-tags">
-            <span class="project-tag">python</span>
-            <span class="project-tag">POO</span>
-            <span class="project-tag">design</span>
-          </div>
-        </div>
-        <div class="project-desc">
-          Dois projetos aplicando polimorfismo: calculadora de áreas geométricas
-          (quadrado, retângulo, círculo) e sistema de pagamentos (Pix, Cartão, Boleto)
-          — mesmo método, comportamentos distintos, zero checagem de tipo.
-        </div>
-        <span class="project-arrow">→</span>
+  <div class="project">
+    <span class="project-num">01</span>
+    <div>
+      <div class="project-name">Polimorfismo em <em>Python</em></div>
+      <div class="project-tags">
+        <span class="project-tag">python</span>
+        <span class="project-tag">POO</span>
+        <span class="project-tag">design</span>
       </div>
-
-      <div class="project">
-        <span class="project-num">02</span>
-        <div>
-          <div class="project-name">Sistema de <em>Cachorros &amp; Dono</em></div>
-          <div class="project-tags">
-            <span class="project-tag">python</span>
-            <span class="project-tag">POO</span>
-            <span class="project-tag">classes</span>
-          </div>
-        </div>
-        <div class="project-desc">
-          Primeira imersão em classes com <code>__init__</code>, self e composição entre objetos.
-          Classe Dono gerencia lista de Cachorros — adotar, alimentar, brincar, ver status.
-        </div>
-        <span class="project-arrow">→</span>
-      </div>
-
-      <div class="project">
-        <span class="project-num">03</span>
-        <div>
-          <div class="project-name">Diário com <em>persistência</em></div>
-          <div class="project-tags">
-            <span class="project-tag">python</span>
-            <span class="project-tag">file i/o</span>
-            <span class="project-tag">cli</span>
-          </div>
-        </div>
-        <div class="project-desc">
-          Aplicação de terminal com leitura e escrita em arquivo, tratamento de exceções
-          e interface limpa. Primeiro projeto em que os dados sobrevivem ao fechamento do programa.
-        </div>
-        <span class="project-arrow">→</span>
-      </div>
-
-      <div class="project">
-        <span class="project-num">04</span>
-        <div>
-          <div class="project-name">Calculadora <em>robusta</em></div>
-          <div class="project-tags">
-            <span class="project-tag">python</span>
-            <span class="project-tag">try/except</span>
-            <span class="project-tag">loops</span>
-          </div>
-        </div>
-        <div class="project-desc">
-          Calculadora no terminal com cinco operações, validação de entrada, loops de repetição
-          e tratamento de exceções — feita para resistir a todo tipo de input inválido.
-        </div>
-        <span class="project-arrow">→</span>
-      </div>
-
-      <div class="project">
-        <span class="project-num">05</span>
-        <div>
-          <div class="project-name">Monitoramento de <em>sensor industrial</em></div>
-          <div class="project-tags">
-            <span class="project-tag">portugol</span>
-            <span class="project-tag">algoritmos</span>
-            <span class="project-tag">acadêmico</span>
-          </div>
-        </div>
-        <div class="project-desc">
-          Projeto acadêmico (UVA) que simula a leitura de 150 valores de sensor em esteira
-          industrial, com modularização por funções, uso de vetores e estruturas condicionais.
-        </div>
-        <span class="project-arrow">→</span>
-      </div>
-
     </div>
+    <div class="project-desc">
+      Dois projetos aplicando polimorfismo: calculadora de áreas geométricas
+      (quadrado, retângulo, círculo) e sistema de pagamentos (Pix, Cartão, Boleto)
+      — mesmo método, comportamentos distintos, zero checagem de tipo.
+    </div>
+    <span class="project-arrow">→</span>
+  </div>
+
+  <div class="project">
+    <span class="project-num">02</span>
+    <div>
+      <div class="project-name">Sistema de <em>Cachorros &amp; Dono</em></div>
+      <div class="project-tags">
+        <span class="project-tag">python</span>
+        <span class="project-tag">POO</span>
+        <span class="project-tag">classes</span>
+      </div>
+    </div>
+    <div class="project-desc">
+      Primeira imersão em classes com <code>__init__</code>, self e composição entre objetos.
+      Classe Dono gerencia lista de Cachorros — adotar, alimentar, brincar, ver status.
+    </div>
+    <span class="project-arrow">→</span>
+  </div>
+
+  <div class="project">
+    <span class="project-num">03</span>
+    <div>
+      <div class="project-name">Diário com <em>persistência</em></div>
+      <div class="project-tags">
+        <span class="project-tag">python</span>
+        <span class="project-tag">file i/o</span>
+        <span class="project-tag">cli</span>
+      </div>
+    </div>
+    <div class="project-desc">
+      Aplicação de terminal com leitura e escrita em arquivo, tratamento de exceções
+      e interface limpa. Primeiro projeto em que os dados sobrevivem ao fechamento do programa.
+    </div>
+    <span class="project-arrow">→</span>
+  </div>
+
+  <div class="project">
+    <span class="project-num">04</span>
+    <div>
+      <div class="project-name">Calculadora <em>robusta</em></div>
+      <div class="project-tags">
+        <span class="project-tag">python</span>
+        <span class="project-tag">try/except</span>
+        <span class="project-tag">loops</span>
+      </div>
+    </div>
+    <div class="project-desc">
+      Calculadora no terminal com cinco operações, validação de entrada, loops de repetição
+      e tratamento de exceções — feita para resistir a todo tipo de input inválido.
+    </div>
+    <span class="project-arrow">→</span>
+  </div>
+
+  <div class="project">
+    <span class="project-num">05</span>
+    <div>
+      <div class="project-name">Monitoramento de <em>sensor industrial</em></div>
+      <div class="project-tags">
+        <span class="project-tag">portugol</span>
+        <span class="project-tag">algoritmos</span>
+        <span class="project-tag">acadêmico</span>
+      </div>
+    </div>
+    <div class="project-desc">
+      Projeto acadêmico (UVA) que simula a leitura de 150 valores de sensor em esteira
+      industrial, com modularização por funções, uso de vetores e estruturas condicionais.
+    </div>
+    <span class="project-arrow">→</span>
+  </div>
+
+</div>
+```
+
   </div>
 </section>
 
 <!-- ============ CERTIFICAÇÕES ============ -->
+
 <section id="certificacoes" class="reveal">
   <div class="container">
     <div class="section-label">04 / Certificações</div>
@@ -878,67 +958,71 @@
       Treze certificados. A base <em>que importa</em> primeiro.
     </h2>
 
-    <div class="certs-grid">
+```
+<div class="certs-grid">
 
-      <div class="cert">
-        <div class="cert-issuer">Google</div>
-        <div class="cert-name">Technical Support Fundamentals</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Google</div>
+    <div class="cert-name">Technical Support Fundamentals</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Google</div>
-        <div class="cert-name">The Bits and Bytes of Computer Networking</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Google</div>
+    <div class="cert-name">The Bits and Bytes of Computer Networking</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Cisco</div>
-        <div class="cert-name">Introduction to Cybersecurity</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Cisco</div>
+    <div class="cert-name">Introduction to Cybersecurity</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Microsoft</div>
-        <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Microsoft</div>
+    <div class="cert-name">AI-900 · Azure AI Fundamentals</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Fundação Bradesco</div>
-        <div class="cert-name">Microsoft Office 365</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Fundação Bradesco</div>
+    <div class="cert-name">Microsoft Office 365</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Fundação Bradesco</div>
-        <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
-        <div class="cert-year">2024</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Fundação Bradesco</div>
+    <div class="cert-name">Fundamentos de TI · Hardware e Software</div>
+    <div class="cert-year">2024</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Fundação Bradesco</div>
-        <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Fundação Bradesco</div>
+    <div class="cert-name">Lei Geral de Proteção de Dados · LGPD</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Google Cloud</div>
-        <div class="cert-name">Introdução ao Gemini Enterprise</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Google Cloud</div>
+    <div class="cert-name">Introdução ao Gemini Enterprise</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-      <div class="cert">
-        <div class="cert-issuer">Coursera</div>
-        <div class="cert-name">Marketing Automation with AI and HubSpot</div>
-        <div class="cert-year">2026</div>
-      </div>
+  <div class="cert">
+    <div class="cert-issuer">Coursera</div>
+    <div class="cert-name">Marketing Automation with AI and HubSpot</div>
+    <div class="cert-year">2026</div>
+  </div>
 
-    </div>
+</div>
+```
+
   </div>
 </section>
 
 <!-- ============ CONTATO ============ -->
+
 <section id="contato" class="contact reveal">
   <div class="container">
     <div class="section-label">05 / Contato</div>
@@ -946,33 +1030,36 @@
       Procurando alguém <em>pronto para começar?</em>
     </h2>
 
-    <div class="contact-list">
+```
+<div class="contact-list">
 
-      <a href="mailto:byvictormartinsreis@gmail.com" class="contact-item">
-        <span class="contact-label">Email</span>
-        <span class="contact-value">byvictormartinsreis@gmail.com</span>
-        <span class="contact-arrow">→</span>
-      </a>
+  <a href="mailto:byvictormartinsreis@gmail.com" class="contact-item">
+    <span class="contact-label">Email</span>
+    <span class="contact-value">byvictormartinsreis@gmail.com</span>
+    <span class="contact-arrow">→</span>
+  </a>
 
-      <a href="https://www.linkedin.com/in/victor-martins-2176b4360" target="_blank" rel="noopener" class="contact-item">
-        <span class="contact-label">LinkedIn</span>
-        <span class="contact-value">/in/victor-martins-2176b4360</span>
-        <span class="contact-arrow">→</span>
-      </a>
+  <a href="https://www.linkedin.com/in/victor-martins-2176b4360" target="_blank" rel="noopener" class="contact-item">
+    <span class="contact-label">LinkedIn</span>
+    <span class="contact-value">/in/victor-martins-2176b4360</span>
+    <span class="contact-arrow">→</span>
+  </a>
 
-      <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="contact-item">
-        <span class="contact-label">GitHub</span>
-        <span class="contact-value">/victormrreis</span>
-        <span class="contact-arrow">→</span>
-      </a>
+  <a href="https://github.com/victormrreis" target="_blank" rel="noopener" class="contact-item">
+    <span class="contact-label">GitHub</span>
+    <span class="contact-value">/victormrreis</span>
+    <span class="contact-arrow">→</span>
+  </a>
 
-      <a href="https://wa.me/5521973581707" target="_blank" rel="noopener" class="contact-item">
-        <span class="contact-label">WhatsApp</span>
-        <span class="contact-value">+55 (21) 97358-1707</span>
-        <span class="contact-arrow">→</span>
-      </a>
+  <a href="https://wa.me/5521973581707" target="_blank" rel="noopener" class="contact-item">
+    <span class="contact-label">WhatsApp</span>
+    <span class="contact-value">+55 (21) 97358-1707</span>
+    <span class="contact-arrow">→</span>
+  </a>
 
-    </div>
+</div>
+```
+
   </div>
 </section>
 
