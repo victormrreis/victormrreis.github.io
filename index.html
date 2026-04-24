@@ -7,6 +7,57 @@
   <title>Victor Martins — IT Support & Help Desk</title>
   <meta name="description"
     content="Estudante de Engenharia da Computação (UVA) em transição para Suporte Técnico. Certificações Google, Cisco e Microsoft.">
+  <meta name="author" content="Victor Martins">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="Victor Martins, Suporte Técnico, Help Desk, IT Support, TI, Nova Iguaçu, Rio de Janeiro, Engenharia da Computação, Google IT Support, Cisco Cybersecurity, Microsoft Azure AI, LGPD, portfólio">
+  <link rel="canonical" href="https://victormrreis.github.io/">
+
+  <!-- Cores do tema (barra do navegador) -->
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0e0e10" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://victormrreis.github.io/">
+  <meta property="og:site_name" content="Victor Martins — Portfolio">
+  <meta property="og:title" content="Victor Martins — IT Support & Help Desk">
+  <meta property="og:description" content="Engenharia da Computação em transição para Suporte Técnico. Certificações Google, Cisco e Microsoft.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Victor Martins — IT Support & Help Desk">
+  <meta name="twitter:description" content="Engenharia da Computação em transição para Suporte Técnico. Certificações Google, Cisco e Microsoft.">
+
+  <!-- Favicon SVG (monograma V) + fallback -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230e0e10'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' font-style='italic' fill='%239fffb1'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230e0e10'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' font-style='italic' fill='%239fffb1'%3EV%3C/text%3E%3C/svg%3E">
+
+  <!-- JSON-LD Person schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Victor Martins",
+    "alternateName": "Victor Martins Reis",
+    "jobTitle": "IT Support / Help Desk",
+    "description": "Computer Engineering student transitioning to IT Support. Google, Cisco and Microsoft certified.",
+    "url": "https://victormrreis.github.io/",
+    "email": "mailto:byvictormartinsreis@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rio de Janeiro",
+      "addressCountry": "BR"
+    },
+    "knowsLanguage": ["pt-BR", "en"],
+    "sameAs": [
+      "https://github.com/victormrreis",
+      "https://www.linkedin.com/in/victor-martins-2176b4360"
+    ]
+  }
+  </script>
 
   <!-- Pré-conexões para performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +83,7 @@
       --text: #e8e8ea;
       --text-dim: #8a8a93;
       --text-muted: #5a5a62;
-      --accent: #9fffb1; 
+      --accent: #9fffb1;
       --accent-dim: #5fc774;
       --nav-bg: rgba(14, 14, 16, 0.65);
       --glow-color: rgba(159, 255, 177, 0.06);
@@ -41,13 +92,13 @@
     }
 
     [data-theme="light"] {
-      --bg: #f7f5f0; 
+      --bg: #f7f5f0;
       --bg-alt: #eeeae1;
       --line: #d8d3c7;
       --text: #2c2c2e;
       --text-dim: #5a5a62;
       --text-muted: #8a8a93;
-      --accent: #0d6e38; 
+      --accent: #0d6e38;
       --accent-dim: #1a8f4c;
       --nav-bg: rgba(247, 245, 240, 0.75);
       --glow-color: rgba(13, 110, 56, 0.04);
@@ -241,6 +292,7 @@
     /* ============ HERO ============ */
     .hero {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex; align-items: center;
       padding-top: 6rem; padding-bottom: 4rem;
       position: relative; overflow: hidden;
@@ -295,13 +347,13 @@
 
     /* ============ SECTIONS (GLOBAL) ============ */
     section { padding: 8rem 0; border-top: 1px solid var(--line); position: relative; }
-    
+
     .section-label {
       font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted);
       margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.15em;
     }
     .section-label::before { content: "/ "; color: var(--accent); }
-    
+
     .section-title {
       font-family: var(--serif); font-weight: 300; font-variation-settings: "opsz" 144, "SOFT" 30;
       font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.05; letter-spacing: -0.02em;
@@ -313,7 +365,7 @@
     .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: start; }
     .about-text p { font-size: 1.1rem; line-height: 1.75; color: var(--text-dim); margin-bottom: 1.5rem; }
     .about-text strong { color: var(--text); font-weight: 500; }
-    
+
     .about-stats {
       display: flex; flex-direction: column; gap: 2rem; padding: 2.5rem;
       background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px;
@@ -365,12 +417,12 @@
     }
     .project:hover { padding-left: 2.5rem; background: var(--glow-color); }
     .project:hover::before { transform: scaleY(1); opacity: 1; }
-    
+
     .project-num { font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); }
     .project-name { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.01em; color: var(--text); transition: color 0.3s ease; }
     .project-name em { font-style: italic; color: var(--accent); }
     .project-desc { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
-    
+
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
     .project-tag {
       font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted);
@@ -432,7 +484,7 @@
 
     .js-enabled .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); will-change: opacity, transform; }
     .js-enabled .reveal.visible { opacity: 1; transform: translateY(0); }
-    
+
     section::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -443,10 +495,115 @@
     .stack-card, .cert, .project { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth); will-change: opacity, transform; }
     .stack-card.animate, .cert.animate, .project.animate { opacity: 1; transform: translateY(0); }
 
+    /* ============ NAV — ACTIVE LINK ============ */
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ============ SKIP LINK (A11Y) ============ */
+    .skip-link {
+      position: fixed; top: 0.5rem; left: 0.5rem;
+      padding: 0.6rem 1rem; z-index: 10000;
+      background: var(--bg); color: var(--accent);
+      font-family: var(--mono); font-size: 0.8rem;
+      border: 1px solid var(--accent); border-radius: 4px;
+      text-decoration: none;
+      transform: translateY(-200%);
+      transition: transform 0.2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* ============ MOBILE MENU ============ */
+    .menu-toggle {
+      display: none;
+      background: none; border: 1px solid transparent;
+      color: var(--text-dim); cursor: pointer;
+      width: 40px; height: 40px;
+      border-radius: 4px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .menu-toggle:hover { color: var(--accent); border-color: var(--line); }
+    .menu-toggle span {
+      display: block; position: absolute; left: 10px;
+      width: 20px; height: 1.5px;
+      background: currentColor; border-radius: 2px;
+      transition: transform 0.3s var(--transition-smooth), opacity 0.2s ease, top 0.3s var(--transition-smooth);
+    }
+    .menu-toggle span:nth-child(1) { top: 14px; }
+    .menu-toggle span:nth-child(2) { top: 19px; }
+    .menu-toggle span:nth-child(3) { top: 24px; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      z-index: 99;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 0 2.5rem;
+      opacity: 0; pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s var(--transition-smooth);
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; width: 100%; }
+    .mobile-menu a {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      font-size: clamp(2rem, 10vw, 3rem); line-height: 1;
+      color: var(--text); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 0.75rem;
+      transition: color 0.3s ease, transform 0.3s var(--transition-smooth);
+    }
+    .mobile-menu a::before {
+      content: attr(data-num);
+      font-family: var(--mono); font-style: normal; font-weight: 400;
+      font-size: 0.75rem; color: var(--text-muted);
+    }
+    .mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--accent); transform: translateX(6px); }
+
+    /* ============ BACK TO TOP ============ */
+    .back-to-top {
+      position: fixed; right: 1.5rem; bottom: 1.5rem;
+      z-index: 50;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s var(--transition-smooth), color 0.3s ease, border-color 0.3s ease;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { color: var(--accent); border-color: var(--accent-dim); }
+    .back-to-top svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ============ TOAST ============ */
+    .toast {
+      position: fixed; left: 50%; bottom: 2rem;
+      transform: translate(-50%, 20px);
+      background: var(--bg-alt); color: var(--text);
+      border: 1px solid var(--accent-dim);
+      border-radius: 6px; padding: 0.75rem 1.25rem;
+      font-family: var(--mono); font-size: 0.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      opacity: 0; pointer-events: none;
+      z-index: 200;
+      transition: opacity 0.3s ease, transform 0.3s var(--transition-smooth);
+    }
+    .toast.visible { opacity: 1; transform: translate(-50%, 0); }
+    .toast::before { content: "✓ "; color: var(--accent); }
+
     /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
       .container { padding: 0 1.5rem; }
       .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .controls { border-left: none; padding-left: 0.5rem; gap: 0.5rem; }
+      .nav-actions { gap: 0.5rem; }
       .hero { padding-top: 7rem; min-height: auto; }
       .about-grid, .project { grid-template-columns: 1fr; gap: 2rem; }
       .project { padding: 2rem 0; }
@@ -458,18 +615,49 @@
       .contact-item:hover { padding-left: 0.5rem; }
       footer .container { flex-direction: column; gap: 1rem; }
       .cursor-glow { display: none; }
+      .back-to-top { right: 1rem; bottom: 1rem; }
+    }
+
+    @media (hover: none) {
+      .cursor-glow { display: none; }
+    }
+
+    /* ============ REDUCED MOTION (A11Y) ============ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      html { scroll-behavior: auto; }
+      .cursor-glow, .logo::after { display: none; }
+      .js-enabled .reveal { opacity: 1; transform: none; }
+      .stack-card, .cert, .project { opacity: 1; transform: none; }
+    }
+
+    /* ============ PRINT ============ */
+    @media print {
+      nav, .cursor-glow, #scroll-progress, .back-to-top, .toast, .mobile-menu, .menu-toggle, body::before { display: none !important; }
+      body { background: #fff; color: #000; }
+      section { page-break-inside: avoid; padding: 2rem 0; border-color: #ccc; }
+      a { color: #000; text-decoration: underline; }
+      .hero { min-height: auto; padding-top: 2rem; }
+      h1 { font-size: 3rem !important; }
+      .project-arrow, .contact-arrow { display: none; }
     }
   </style>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link" data-i18n="a11y.skip">Pular para o conteúdo</a>
   <div id="scroll-progress" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
 
   <nav id="navbar" aria-label="Main Navigation">
     <div class="container">
       <a href="#" class="logo" aria-label="Victor Martins Home">victor.martins</a>
-      
+
       <div class="nav-actions">
         <ul class="nav-links">
           <li><a href="#about" data-i18n="nav.about">sobre</a></li>
@@ -478,26 +666,41 @@
           <li><a href="#certs" data-i18n="nav.certs">certificações</a></li>
           <li><a href="#contact" data-i18n="nav.contact">contato</a></li>
         </ul>
-        
+
         <div class="controls">
           <button id="lang-toggle" class="icon-btn" aria-label="Toggle language (Current: PT)" title="Switch Language">EN</button>
           <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Switch Theme">
-            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 4.5v-3m0 21v-3m8.485-14.485l-2.121 2.121M5.636 18.364l-2.121 2.121M19.5 12h3m-21 0h3m14.485 8.485l-2.121-2.121M5.636 5.636L3.515 3.515M12 17.25a5.25 5.25 0 110-10.5 5.25 5.25 0 010 10.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5v-3m0 21v-3m8.485-14.485l-2.121 2.121M5.636 18.364l-2.121 2.121M19.5 12h3m-21 0h3m14.485 8.485l-2.121-2.121M5.636 5.636L3.515 3.515M12 17.25a5.25 5.25 0 110-10.5 5.25 5.25 0 010 10.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+          <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <span></span><span></span><span></span>
           </button>
         </div>
       </div>
     </div>
   </nav>
 
-  <main>
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <nav aria-label="Mobile Navigation">
+      <ul>
+        <li><a href="#about" data-num="01" data-i18n="nav.about">sobre</a></li>
+        <li><a href="#stack" data-num="02" data-i18n="nav.stack">stack</a></li>
+        <li><a href="#projects" data-num="03" data-i18n="nav.projects">projetos</a></li>
+        <li><a href="#certs" data-num="04" data-i18n="nav.certs">certificações</a></li>
+        <li><a href="#contact" data-num="05" data-i18n="nav.contact">contato</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main id="main-content">
     <header class="hero">
       <div class="container">
         <div class="hero-grid" id="parallax-hero">
           <div class="hero-tag" data-i18n="hero.tag">disponível para vagas · nova iguaçu / rj</div>
           <h1 data-i18n="hero.title">Victor<br><em>Martins</em></h1>
           <p class="hero-sub" data-i18n="hero.sub">
-            Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk. 
+            Estudante de Engenharia da Computação em transição para Suporte Técnico e Help Desk.
             Base em redes, sistemas e automação — construída com certificações Google, Cisco e Microsoft.
           </p>
 
@@ -792,6 +995,11 @@
     </div>
   </footer>
 
+  <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 15 12 9 18 15"></polyline></svg>
+  </button>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
   <script>
     document.documentElement.classList.add('js-enabled');
     document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -801,6 +1009,13 @@
        ======================================================== */
     const translations = {
       pt: {
+        "doc.title": "Victor Martins — Suporte Técnico & Help Desk",
+        "a11y.skip": "Pular para o conteúdo",
+        "a11y.menuOpen": "Abrir menu",
+        "a11y.menuClose": "Fechar menu",
+        "a11y.backToTop": "Voltar ao topo",
+        "a11y.langToggle": "Alternar idioma (atual: PT)",
+        "toast.emailCopied": "E-mail copiado",
         "nav.about": "sobre", "nav.stack": "stack", "nav.projects": "projetos", "nav.certs": "certificações", "nav.contact": "contato",
         "hero.tag": "disponível para vagas · nova iguaçu / rj",
         "hero.title": "Victor<br><em>Martins</em>",
@@ -843,6 +1058,13 @@
         "footer.built": "Design focado em conversão. Hospedado no GitHub Pages."
       },
       en: {
+        "doc.title": "Victor Martins — IT Support & Help Desk",
+        "a11y.skip": "Skip to content",
+        "a11y.menuOpen": "Open menu",
+        "a11y.menuClose": "Close menu",
+        "a11y.backToTop": "Back to top",
+        "a11y.langToggle": "Toggle language (current: EN)",
+        "toast.emailCopied": "Email copied",
         "nav.about": "about", "nav.stack": "stack", "nav.projects": "projects", "nav.certs": "certifications", "nav.contact": "contact",
         "hero.tag": "open to work · nova iguaçu / br",
         "hero.title": "Victor<br><em>Martins</em>",
@@ -886,182 +1108,242 @@
       }
     };
 
-    let currentLang = 'pt';
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const root = document.documentElement;
+
+    /* ----- Language (persistent) ----- */
     const langBtn = document.getElementById('lang-toggle');
+    const savedLang = localStorage.getItem('lang');
+    let currentLang = savedLang === 'en' || savedLang === 'pt'
+      ? savedLang
+      : ((navigator.language || 'pt').toLowerCase().startsWith('pt') ? 'pt' : 'en');
+
+    const applyTranslations = () => {
+      const dict = translations[currentLang];
+      root.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+      document.title = dict['doc.title'];
+      langBtn.textContent = currentLang === 'pt' ? 'EN' : 'PT';
+      langBtn.setAttribute('aria-label', dict['a11y.langToggle']);
+      langBtn.setAttribute('title', dict['a11y.langToggle']);
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] != null) el.innerHTML = dict[key];
+      });
+
+      const backBtn = document.getElementById('back-to-top');
+      if (backBtn) {
+        backBtn.setAttribute('aria-label', dict['a11y.backToTop']);
+        backBtn.setAttribute('title', dict['a11y.backToTop']);
+      }
+      const menuBtn = document.getElementById('menu-toggle');
+      if (menuBtn) {
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        const label = expanded ? dict['a11y.menuClose'] : dict['a11y.menuOpen'];
+        menuBtn.setAttribute('aria-label', label);
+      }
+    };
 
     langBtn.addEventListener('click', () => {
       currentLang = currentLang === 'pt' ? 'en' : 'pt';
-      document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
-      langBtn.textContent = currentLang === 'pt' ? 'EN' : 'PT';
-      langBtn.setAttribute('aria-label', `Toggle language (Current: ${currentLang.toUpperCase()})`);
-      
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-          el.innerHTML = translations[currentLang][key];
-        }
-      });
+      localStorage.setItem('lang', currentLang);
+      applyTranslations();
     });
+    applyTranslations();
 
-    /* ========================================================
-       THEME TOGGLE (DARK / LIGHT)
-       ======================================================== */
+    /* ----- Theme ----- */
     const themeBtn = document.getElementById('theme-toggle');
-    const root = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     root.setAttribute('data-theme', savedTheme);
 
     themeBtn.addEventListener('click', () => {
-      const currentTheme = root.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
     });
 
-    /* ========================================================
-       SCROLL PROGRESS & NAVBAR
-       ======================================================== */
+    /* ----- Scroll progress + navbar + active section ----- */
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
+    const backToTopBtn = document.getElementById('back-to-top');
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      scrollProgress.style.width = scrolled + "%";
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        navbar.classList.toggle('scrolled', y > 50);
+        backToTopBtn.classList.toggle('visible', y > 600);
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        scrollProgress.style.width = h > 0 ? ((y / h) * 100) + '%' : '0%';
+        ticking = false;
+      });
     }, { passive: true });
 
-    /* ========================================================
-       CURSOR GLOW FX
-       ======================================================== */
-    const cursorGlow = document.querySelector('.cursor-glow');
-    document.addEventListener('mousemove', (e) => {
-      cursorGlow.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
-    }, { passive: true });
+    /* ----- Back to top ----- */
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    });
 
-    const parallaxHero = document.getElementById('parallax-hero');
-    document.addEventListener('mousemove', (e) => {
-      if(window.innerWidth > 900) {
-        const x = (window.innerWidth / 2 - e.pageX) / 100;
-        const y = (window.innerHeight / 2 - e.pageY) / 100;
-        parallaxHero.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    /* ----- Active nav link (scrollspy) ----- */
+    const sectionIds = ['about', 'stack', 'projects', 'certs', 'contact'];
+    const navLinkMap = new Map();
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+      const id = a.getAttribute('href').replace('#', '');
+      if (!navLinkMap.has(id)) navLinkMap.set(id, []);
+      navLinkMap.get(id).push(a);
+    });
+    const activeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.nav-links a.active').forEach(a => a.classList.remove('active'));
+          const links = navLinkMap.get(entry.target.id) || [];
+          links.forEach(a => a.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) activeObserver.observe(el);
+    });
+
+    /* ----- Mobile menu ----- */
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const setMenu = (open) => {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.toggle('open', open);
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      const dict = translations[currentLang];
+      menuToggle.setAttribute('aria-label', open ? dict['a11y.menuClose'] : dict['a11y.menuOpen']);
+    };
+    menuToggle.addEventListener('click', () => {
+      setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => setMenu(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuToggle.focus();
       }
-    }, { passive: true });
+    });
 
-    /* ========================================================
-       SCRAMBLE EFFECT
-       ======================================================== */
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
-    document.querySelectorAll('.scramble-target').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        const target = el.querySelector('.stack-card-title, .project-num, .cert-issuer, .contact-label, .project-name') || el;
-        if (target.dataset.scrambling === "true") return;
-        
-        target.dataset.scrambling = "true";
-        const originalText = target.innerText;
-        let iterations = 0;
-
-        const interval = setInterval(() => {
-          target.innerText = originalText.split("").map((letter, index) => {
-            if(index < iterations || letter === " " || letter === "\n") return originalText[index];
-            return chars[Math.floor(Math.random() * chars.length)];
-          }).join("");
-          
-          if(iterations >= originalText.length) {
-            clearInterval(interval);
-            target.dataset.scrambling = "false";
-            target.innerHTML = originalText;
+    /* ----- Email copy-to-clipboard + toast ----- */
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.classList.add('visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('visible'), 2200);
+    };
+    document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+      a.addEventListener('click', async (e) => {
+        const email = a.getAttribute('href').replace('mailto:', '');
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            e.preventDefault();
+            await navigator.clipboard.writeText(email);
+            showToast(translations[currentLang]['toast.emailCopied']);
+            setTimeout(() => { window.location.href = a.getAttribute('href'); }, 250);
+          } catch {
+            /* fall through to default mailto */
           }
-          iterations += 1 / 2;
-        }, 30);
+        }
       });
     });
 
-    /* ========================================================
-       INTERSECTION OBSERVER
-       ======================================================== */
+    /* ----- Cursor glow + hero parallax (skipped if reduced motion) ----- */
+    if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
+      const cursorGlow = document.querySelector('.cursor-glow');
+      const parallaxHero = document.getElementById('parallax-hero');
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+        if (window.innerWidth > 900) {
+          const x = (window.innerWidth / 2 - e.pageX) / 100;
+          const y = (window.innerHeight / 2 - e.pageY) / 100;
+          parallaxHero.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+      }, { passive: true });
+    }
+
+    /* ----- Scramble effect (skipped if reduced motion) ----- */
+    if (!prefersReducedMotion) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+      document.querySelectorAll('.scramble-target').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          const target = el.querySelector('.stack-card-title, .project-num, .cert-issuer, .contact-label, .project-name') || el;
+          if (target.dataset.scrambling === "true") return;
+          target.dataset.scrambling = "true";
+          const originalText = target.innerText;
+          let iterations = 0;
+          const interval = setInterval(() => {
+            target.innerText = originalText.split("").map((letter, index) => {
+              if (index < iterations || letter === " " || letter === "\n") return originalText[index];
+              return chars[Math.floor(Math.random() * chars.length)];
+            }).join("");
+            if (iterations >= originalText.length) {
+              clearInterval(interval);
+              target.dataset.scrambling = "false";
+              target.innerHTML = originalText;
+            }
+            iterations += 1 / 2;
+          }, 30);
+        });
+      });
+    }
+
+    /* ----- Reveal on scroll ----- */
     const animateChildren = (parent) => {
-      const children = parent.querySelectorAll('.stack-card, .cert, .project');
-      children.forEach((child, index) => {
-        setTimeout(() => child.classList.add('animate'), index * 100);
+      parent.querySelectorAll('.stack-card, .cert, .project').forEach((child, i) => {
+        setTimeout(() => child.classList.add('animate'), i * 90);
       });
     };
-
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           if (entry.target.querySelector('.stack-grid, .certs-grid, .projects-list')) {
-            setTimeout(() => animateChildren(entry.target), 150);
+            setTimeout(() => animateChildren(entry.target), 120);
           }
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
     document.querySelectorAll('.reveal').forEach(section => revealObserver.observe(section));
 
-    /* ========================================================
-       CERTIFICATION DYNAMIC LOADER
-       ======================================================== */
-    const certSummaries = {
-      'technical-support-fundamentals': 'Troubleshooting, ticketing, customer service and IT support basics.',
-      'bits-bytes-networking': 'OSI model, TCP/IP, DNS, DHCP, and LAN/WAN troubleshooting.',
-      'cybersecurity-intro': 'Global threats, cryptography, password policies, and social engineering defense.',
-      'azure-ai-900': 'Machine Learning, Computer Vision, NLP, and ethical AI using Azure.',
-      'office-365': 'Word, Excel, Teams, Outlook, and OneDrive for collaboration and support.',
-      'hardware-software': 'PC structure (CPU, RAM), peripherals, assembly, and OS installation.',
-      'lgpd': 'Compliance with General Data Protection Law, privacy, and user rights.',
-      'gemini-enterprise': 'Introduction to generative AI in corporate environments and Google Workspace.',
-      'hubspot-ai': 'Using AI and HubSpot for workflow automation and marketing data analysis.',
-      'coca-cola-coletivo': 'Soft skills development for the modern job market.'
+    /* ----- Count-up for stats ----- */
+    const countUp = (el) => {
+      const target = parseInt(el.textContent, 10);
+      if (isNaN(target) || prefersReducedMotion) return;
+      const duration = 1200;
+      const start = performance.now();
+      const from = 0;
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(from + (target - from) * eased).toString();
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = target.toString();
+      };
+      requestAnimationFrame(step);
     };
-
-    // Override for Portuguese
-    certSummaries['technical-support-fundamentals_pt'] = 'Diagnóstico de problemas, registro de chamados, soft skills para Help Desk e estrutura base de suporte de TI.';
-    certSummaries['bits-bytes-networking_pt'] = 'Aprofundamento em modelo OSI, protocolos TCP/IP, DNS, DHCP, ferramentas de rede e troubleshooting LAN/WAN.';
-    certSummaries['cybersecurity-intro_pt'] = 'Ameaças globais, criptografia básica, boas práticas de senhas corporativas e defesa contra engenharia social/phishing.';
-    certSummaries['azure-ai-900_pt'] = 'Princípios de Machine Learning, Visão Computacional, NLP e desenvolvimento ético utilizando o ecossistema Azure.';
-    certSummaries['office-365_pt'] = 'Domínio corporativo das ferramentas Word, Excel, Teams, Outlook e OneDrive para colaboração e suporte de primeiro nível.';
-    certSummaries['hardware-software_pt'] = 'Estrutura física de PCs (CPU, RAM, Placas-mãe), periféricos, processos de montagem e instalação de Sistemas Operacionais.';
-    certSummaries['lgpd_pt'] = 'Conformidade com a Lei Geral de Proteção de Dados, privacidade e direitos do usuário.';
-    certSummaries['gemini-enterprise_pt'] = 'Introdução ao uso de IA generativa em ambientes corporativos e Google Workspace.';
-    certSummaries['hubspot-ai_pt'] = 'Uso de IA e HubSpot para automação de fluxos e análise de dados de marketing.';
-    certSummaries['coca-cola-coletivo_pt'] = 'Desenvolvimento de soft skills para o mercado de trabalho moderno.';
-
-    const loadCertDescriptions = () => {
-      document.querySelectorAll('.cert').forEach((cert, index) => {
-        const key = cert.dataset.cert;
-        const desc = cert.querySelector('.cert-description');
-        const langKey = currentLang === 'pt' ? `${key}_pt` : key;
-        
-        setTimeout(() => {
-          if (certSummaries[langKey]) {
-            desc.textContent = certSummaries[langKey];
-            desc.classList.remove('cert-loading');
-          }
-        }, 300 + (index * 100));
-      });
-    };
-
-    const certObserver = new IntersectionObserver((entries) => {
+    const statsObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          loadCertDescriptions();
-          certObserver.unobserve(entry.target);
+          entry.target.querySelectorAll('.stat-number').forEach(countUp);
+          observer.unobserve(entry.target);
         }
       });
-    });
-    certObserver.observe(document.getElementById('certs'));
-
-    // Re-trigger cert description on lang change
-    langBtn.addEventListener('click', () => {
-        setTimeout(loadCertDescriptions, 100);
-    });
+    }, { threshold: 0.4 });
+    const aboutStats = document.querySelector('.about-stats');
+    if (aboutStats) statsObserver.observe(aboutStats);
 
   </script>
 </body>
+
 </html>
