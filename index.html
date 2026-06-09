@@ -7,11 +7,11 @@
 
   <title>Victor Martins Reis — Portfólio de TI, Suporte e Desenvolvimento</title>
   <meta name="description"
-    content="Portfólio profissional de Victor Martins Reis: estudante de Engenharia da Computação e Técnico em Desenvolvimento de Sistemas, com foco em Suporte Técnico, Operações de TI, Service Desk, Python, Linux, Git, Segurança da Informação e automação." />
+    content="Portfólio profissional de Victor Martins Reis: estudante de Engenharia da Computação e Técnico em Desenvolvimento de Sistemas, com foco em Suporte Técnico, Operações de TI, Service Desk, Desenvolvimento de Sistemas, Python, Linux, Git, Segurança da Informação, dados, automação e infraestrutura." />
   <meta name="author" content="Victor Martins Reis" />
   <meta name="robots" content="index, follow" />
   <meta name="keywords"
-    content="Victor Martins Reis, Portfólio TI, Suporte Técnico, Service Desk, Help Desk, Python, Git, GitHub, Linux, Debian, Segurança da Informação, Engenharia da Computação, Técnico em Desenvolvimento de Sistemas, Nova Iguaçu, Rio de Janeiro, PRESTSERV, Petrobras" />
+    content="Victor Martins Reis, Portfólio TI, Suporte Técnico, Service Desk, Help Desk, Operações de TI, Desenvolvimento de Sistemas, Dados, Automação, Infraestrutura, Python, Git, GitHub, Linux, Debian, Excel Avançado, Segurança da Informação, LGPD, Engenharia da Computação, UVA, Cruzeiro do Sul Virtual, Nova Iguaçu, Baixada Fluminense, Rio de Janeiro, PRESTSERV, Petrobras" />
   <link rel="canonical" href="https://victormrreis.github.io/" />
 
   <meta name="color-scheme" content="dark light" />
@@ -25,11 +25,16 @@
   <meta property="og:description"
     content="Estudante de Engenharia da Computação e Técnico em Desenvolvimento de Sistemas. Foco em Suporte Técnico, Operações de TI, Service Desk, Python, Linux, Git e Segurança da Informação." />
   <meta property="og:locale" content="pt_BR" />
+  <meta property="og:image"
+    content="https://victormrreis.github.io/og-cover.svg" />
+  <meta property="og:image:alt" content="Victor Martins Reis — Portfólio de TI, Suporte e Desenvolvimento" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Victor Martins Reis — Portfólio de TI" />
   <meta name="twitter:description"
     content="Suporte Técnico, Operações de TI, Python, Linux, Git, Segurança da Informação e documentação profissional." />
+  <meta name="twitter:image"
+    content="https://victormrreis.github.io/og-cover.svg" />
 
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0f0d'/%3E%3Cpath d='M16 15h9l7 24 7-24h9L37 49H27L16 15Z' fill='%239fffb1'/%3E%3C/svg%3E" />
@@ -51,19 +56,30 @@
       "addressRegion": "RJ",
       "addressCountry": "BR"
     },
-    "knowsLanguage": ["pt-BR", "en"],
+    "knowsLanguage": ["pt-BR", "en", "es"],
     "knowsAbout": [
       "IT Support",
       "Service Desk",
       "Help Desk",
+      "IT Operations",
+      "Software Development",
       "Python",
       "Linux",
+      "Debian",
       "Git",
       "GitHub",
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Computer Networking",
       "Cybersecurity",
       "LGPD",
       "Microsoft 365",
-      "Google Workspace"
+      "Excel",
+      "Google Workspace",
+      "Azure AI Fundamentals",
+      "IT Governance",
+      "Automation"
     ],
     "sameAs": [
       "https://github.com/victormrreis",
@@ -1055,6 +1071,109 @@
       gap: 1rem;
     }
 
+    /* LANGUAGES + INFO */
+    .lang-info-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .lang-list {
+      display: grid;
+      gap: .9rem;
+    }
+
+    .lang-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      padding: 1.2rem 1.3rem;
+    }
+
+    .lang-item-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .55rem;
+    }
+
+    .lang-item-top h3 {
+      font: 600 1.08rem/1.2 var(--sans);
+    }
+
+    .lang-level {
+      color: var(--accent);
+      font: 600 .74rem var(--mono);
+      white-space: nowrap;
+    }
+
+    .lang-item p {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: .8rem;
+    }
+
+    .lang-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+
+    .lang-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .info-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      padding: 1.3rem;
+      height: 100%;
+    }
+
+    .info-card h3 {
+      font: 600 1.08rem/1.2 var(--sans);
+      margin-bottom: .9rem;
+    }
+
+    .info-rows {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .85rem;
+      align-items: start;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .info-row b {
+      color: var(--accent);
+      font: 600 .72rem var(--mono);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding-top: .1rem;
+    }
+
+    .info-row span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
     /* PROJECTS */
     .project-toolbar {
       display: flex;
@@ -1472,6 +1591,7 @@
       .cert-layout,
       .contact-grid,
       .about-grid,
+      .lang-info-grid,
       .two-col {
         grid-template-columns: 1fr;
       }
@@ -1654,11 +1774,12 @@
         <li><a href="#experiencia">experiência</a></li>
         <li><a href="#projetos">projetos</a></li>
         <li><a href="#certificacoes">certificações</a></li>
+        <li><a href="#idiomas">idiomas</a></li>
         <li><a href="#contato">contato</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a class="btn ghost" href="./Curriculo_Victor_Martins_Reis_Atualizado.pdf" target="_blank" rel="noopener">CV PDF</a>
+        <a class="btn ghost" href="./Curriculo_Victor_Martins_Reis_Atualizado_LinkedIn.pdf" target="_blank" rel="noopener">CV PDF</a>
         <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema">
           <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="4"></circle>
@@ -1683,7 +1804,8 @@
       <li><a href="#experiencia">experiência <span>03</span></a></li>
       <li><a href="#projetos">projetos <span>04</span></a></li>
       <li><a href="#certificacoes">certificações <span>05</span></a></li>
-      <li><a href="#contato">contato <span>06</span></a></li>
+      <li><a href="#idiomas">idiomas <span>06</span></a></li>
+      <li><a href="#contato">contato <span>07</span></a></li>
     </ul>
   </nav>
 
@@ -1697,8 +1819,8 @@
             <p class="hero-subtitle">
               Estudante de <strong>Engenharia da Computação</strong> e
               <strong>Técnico em Desenvolvimento de Sistemas</strong>, com experiência em ambiente industrial de alta
-              criticidade e foco em <strong>Suporte Técnico, Service Desk, Operações de TI, Python, Linux, Git e
-                Segurança da Informação</strong>.
+              criticidade e foco em <strong>Suporte Técnico, Operações de TI, Desenvolvimento de Sistemas, Python,
+                Linux, Git, Segurança da Informação, dados e automação</strong>.
             </p>
 
             <div class="hero-ctas">
@@ -1706,7 +1828,7 @@
               <a class="btn" href="https://www.linkedin.com/in/victor-martins-2176b4360" target="_blank"
                 rel="noopener">LinkedIn</a>
               <a class="btn" href="https://github.com/victormrreis" target="_blank" rel="noopener">GitHub</a>
-              <a class="btn ghost" href="./Curriculo_Victor_Martins_Reis_Atualizado.pdf" target="_blank"
+              <a class="btn ghost" href="./Curriculo_Victor_Martins_Reis_Atualizado_LinkedIn.pdf" target="_blank"
                 rel="noopener">Baixar currículo</a>
             </div>
 
@@ -1769,7 +1891,7 @@
 
               <div class="panel-footer">
                 <span class="mono accent">Pronto para ambientes que exigem organização, rastreabilidade e execução.</span>
-                <span>Última atualização: maio/2026</span>
+                <span>Última atualização: junho/2026</span>
               </div>
             </div>
           </aside>
@@ -1794,8 +1916,8 @@
               <span>Base em suporte, redes, segurança e IA</span>
             </div>
             <div class="trust-item">
-              <strong>GitHub Pages</strong>
-              <span>Portfólio publicado e versionado</span>
+              <strong>Inglês avançado</strong>
+              <span>Wizard W12 · 8 anos de formação</span>
             </div>
           </div>
         </div>
@@ -1904,10 +2026,10 @@
             <span class="skill-num">04</span>
             <h3>Programação</h3>
             <ul>
-              <li>Python: funções, listas, dicionários, arquivos, exceções e POO</li>
-              <li>Projetos práticos via terminal com persistência de dados</li>
-              <li>Git e GitHub para versionamento e publicação de projetos</li>
-              <li>HTML5, CSS3 e JavaScript básico para portfólio e web</li>
+              <li>Python: funções, listas, dicionários, arquivos, exceções, CRUD básico e POO</li>
+              <li>Lógica de programação e algoritmos, incluindo Portugol em projeto acadêmico</li>
+              <li>Git, GitHub e GitHub Pages para versionamento e publicação de projetos</li>
+              <li>HTML5, CSS3 e JavaScript básico no VS Code para portfólio e web</li>
             </ul>
           </article>
 
@@ -1962,11 +2084,12 @@
                   <small>09/2025 — atual</small>
                 </header>
                 <ul>
-                  <li>Atendimento de demandas internas e suporte operacional a equipes administrativas e operacionais.</li>
-                  <li>Operação dos sistemas PRESTSERV e Velti Ponto, com cadastros, atualizações, conferências e correção de inconsistências.</li>
-                  <li>Controle documental, rastreabilidade, padronização de registros, relatórios e cumprimento de procedimentos.</li>
-                  <li>Roteamento de solicitações, identificação de prioridades e comunicação com stakeholders técnicos e administrativos.</li>
-                  <li>Uso de Excel e Microsoft 365 para relatórios, filtros, organização de dados e apoio à rotina operacional.</li>
+                  <li>Atendimento de demandas internas e suporte operacional a equipes administrativas e operacionais em ambiente industrial de alta criticidade — prática transferível para atendimento N1, Service Desk e suporte corporativo.</li>
+                  <li>Operação dos sistemas PRESTSERV (prestadores e contratos) e Velti Ponto (ponto eletrônico), com cadastros, atualizações, conferências e correção de inconsistências.</li>
+                  <li>Controle documental, rastreabilidade, padronização de registros, OMs, relatórios e cumprimento de procedimentos formalizados.</li>
+                  <li>Roteamento de correspondências e demandas, com identificação de prioridade e escalonamento — fluxo análogo à classificação e ao acompanhamento de tickets.</li>
+                  <li>Elaboração de relatórios e planilhas em Excel com fórmulas, filtros, tabelas dinâmicas e validação de dados para conferência e apoio à decisão.</li>
+                  <li>Comunicação com stakeholders operacionais, técnicos e gerenciais, aplicando clareza e escuta ativa, sob prazos e SLAs internos.</li>
                 </ul>
               </div>
             </article>
@@ -1995,7 +2118,7 @@
                     <h3>Técnico em Desenvolvimento de Sistemas</h3>
                     <p>Cruzeiro do Sul Virtual · em andamento</p>
                   </div>
-                  <small>03/2026 — previsão 2027</small>
+                  <small>03/2026 — 12/2027</small>
                 </header>
                 <p>Curso técnico voltado ao desenvolvimento, teste, implantação de sistemas, programação e organização de soluções digitais.</p>
               </div>
@@ -2323,10 +2446,86 @@
       </div>
     </section>
 
+    <section class="section reveal" id="idiomas">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">06 / Idiomas & disponibilidade</span>
+          <div>
+            <h2 class="section-title">Inglês avançado para documentação técnica e <em>aprendizado contínuo</em>.</h2>
+            <p class="section-lead">
+              Oito anos de formação contínua em inglês sustentam a leitura de documentação, a comunicação profissional e
+              o estudo de cursos internacionais — somados à logística que viabiliza atuação em toda a Região
+              Metropolitana do Rio.
+            </p>
+          </div>
+        </div>
+
+        <div class="lang-info-grid">
+          <div class="lang-list" aria-label="Idiomas">
+            <article class="lang-item">
+              <div class="lang-item-top">
+                <h3>Inglês</h3>
+                <span class="lang-level">Avançado · W12</span>
+              </div>
+              <p>
+                8 anos de formação contínua na Wizard by Pearson, com nível W12 concluído. Leitura fluente de
+                documentação técnica, conversação e escrita profissional.
+              </p>
+              <div class="lang-bar" aria-hidden="true"><span style="width: 90%"></span></div>
+            </article>
+
+            <article class="lang-item">
+              <div class="lang-item-top">
+                <h3>Espanhol</h3>
+                <span class="lang-level">Profissional limitado</span>
+              </div>
+              <p>
+                Compreensão funcional para leitura básica e interações simples em contexto profissional.
+              </p>
+              <div class="lang-bar" aria-hidden="true"><span style="width: 40%"></span></div>
+            </article>
+
+            <article class="lang-item">
+              <div class="lang-item-top">
+                <h3>Português</h3>
+                <span class="lang-level">Nativo</span>
+              </div>
+              <p>
+                Comunicação escrita e verbal plena para documentação, atendimento e relacionamento com stakeholders.
+              </p>
+              <div class="lang-bar" aria-hidden="true"><span style="width: 100%"></span></div>
+            </article>
+          </div>
+
+          <aside class="info-card" aria-label="Informações adicionais">
+            <h3>Informações adicionais</h3>
+            <div class="info-rows">
+              <div class="info-row">
+                <b>CNH</b>
+                <span>Categoria B — habilitado para deslocamentos profissionais.</span>
+              </div>
+              <div class="info-row">
+                <b>Disponibilidade</b>
+                <span>Integral, em modalidade presencial, híbrida ou remota.</span>
+              </div>
+              <div class="info-row">
+                <b>Localização</b>
+                <span>Nova Iguaçu, RJ — disponibilidade para Baixada Fluminense, Zona Norte, Centro do Rio e Região Metropolitana.</span>
+              </div>
+              <div class="info-row">
+                <b>LinkedIn</b>
+                <span>Perfil ativo com publicações técnicas sobre Python, POO, Git/GitHub, Linux Debian, redes, segurança e governança.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <section class="section reveal" id="prova-social">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">06 / Construção pública</span>
+          <span class="eyebrow">07 / Construção pública</span>
           <div>
             <h2 class="section-title">Registro constante da evolução técnica no <em>LinkedIn</em>.</h2>
             <p class="section-lead">
@@ -2373,7 +2572,7 @@
     <section class="section reveal" id="contato">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">07 / Contato</span>
+          <span class="eyebrow">08 / Contato</span>
           <div>
             <h2 class="section-title">Aberto a oportunidades onde organização e aprendizado rápido <em>importam</em>.</h2>
             <p class="section-lead">
@@ -2437,7 +2636,7 @@
   <footer>
     <div class="container">
       <span>© <span id="year"></span> Victor Martins Reis</span>
-      <span>Portfólio publicado no GitHub Pages · atualizado em maio/2026</span>
+      <span>Portfólio publicado no GitHub Pages · atualizado em junho/2026</span>
     </div>
   </footer>
 
